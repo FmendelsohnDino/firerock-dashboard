@@ -1,0 +1,32 @@
+name: Update Dashboard Data
+
+on:
+  push:
+    paths:
+      - 'sales_report.xlsx'
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install openpyxl
+
+      - name: Extract data from Excel
+        run: python extract_data.py sales_report.xlsx
+
+      - name: Commit updated data
+        run: |
+          git config --global user.email "dashboard@firerock.com"
+          git config --global user.name "FireRock Dashboard Bot"
+          git add data/data.json
+          git diff --staged --quiet || git commit -m "Auto-update dashboard data $(date +'%Y-%m-%d %H:%M')"
+          git push
