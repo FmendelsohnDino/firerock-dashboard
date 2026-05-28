@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FireRock Dashboard Updater</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #111; color: #F5F3F0;
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    background-image: radial-gradient(ellipse at 20% 20%, rgba(232,64,10,0.12) 0%, transparent 60%);
+  }
+  .card {
+    background: #1E1E1E; border: 1px solid #2A2A2A; border-radius: 16px;
+    padding: 48px 40px; width: 100%; max-width: 480px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.6);
+  }
+  .logo { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+  .flame { width:36px; height:36px; background:#E8400A; clip-path:polygon(50% 0%,100% 100%,0% 100%); }
+  .brand { font-family:'Bebas Neue',sans-serif; font-size:24px; letter-spacing:4px; }
+  .brand span { color:#E8400A; }
+  h1 { font-family:'Bebas Neue',sans-serif; font-size:30px; letter-spacing:2px; margin-bottom:6px; }
+  .sub { color:#666; font-size:13px; margin-bottom:32px; line-height:1.6; }
+  .drop-zone {
+    border: 2px dashed #2A2A2A; border-radius:12px; padding:32px 24px;
+    text-align:center; cursor:pointer; transition:all 0.2s; margin-bottom:16px; position:relative;
+  }
+  .drop-zone:hover, .drop-zone.over { border-color:#E8400A; background:rgba(232,64,10,0.05); }
+  .drop-zone input { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+  .drop-icon { font-size:36px; margin-bottom:10px; }
+  .drop-text { color:#AAA; font-size:13px; line-height:1.7; }
+  .drop-text strong { color:#F5F3F0; }
+  .file-info { display:none; background:rgba(46,204,113,0.1); border:1px solid #2ECC71; border-radius:8px; padding:10px 14px; margin-bottom:14px; font-family:'DM Mono',monospace; font-size:11px; color:#2ECC71; }
+  .prog-wrap { display:none; margin-bottom:14px; }
+  .prog-lbl { font-size:11px; color:#666; font-family:'DM Mono',monospace; margin-bottom:6px; }
+  .prog-bar { height:4px; background:#2A2A2A; border-radius:2px; overflow:hidden; }
+  .prog-fill { height:100%; background:#E8400A; border-radius:2px; width:0%; transition:width 0.3s; }
+  .status { display:none; text-align:center; padding:12px; border-radius:8px; margin-bottom:14px; font-size:12px; font-family:'DM Mono',monospace; }
+  .status.ok { background:rgba(46,204,113,0.1); border:1px solid #2ECC71; color:#2ECC71; }
+  .status.err { background:rgba(231,76,60,0.1); border:1px solid #E74C3C; color:#E74C3C; }
+  .btn-up { width:100%; background:#E8400A; color:white; border:none; border-radius:10px; padding:15px; font-family:'Bebas Neue',sans-serif; font-size:17px; letter-spacing:2px; cursor:pointer; transition:all 0.2s; margin-bottom:10px; }
+  .btn-up:hover { background:#FF5A1F; transform:translateY(-1px); }
+  .btn-up:disabled { background:#2A2A2A; color:#666; cursor:not-allowed; transform:none; }
+  .btn-view { width:100%; background:transparent; color:#AAA; border:1px solid #2A2A2A; border-radius:10px; padding:11px; font-size:13px; cursor:pointer; transition:all 0.2s; text-decoration:none; display:block; text-align:center; }
+  .btn-view:hover { border-color:#E8400A; color:#E8400A; }
+  .foot { margin-top:20px; text-align:center; font-size:10px; color:#444; font-family:'DM Mono',monospace; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="logo"><div class="flame"></div><div class="brand">FIRE<span>ROCK</span></div></div>
+  <h1>Dashboard Updater</h1>
+  <p class="sub">Select your daily sales report to update the live dashboard automatically.</p>
+
+  <div class="drop-zone" id="dz">
+    <input type="file" id="fi" accept=".xlsx,.xlsm,.xls">
+    <div class="drop-icon">📊</div>
+    <div class="drop-text"><strong>Click to select</strong> or drag & drop<br>your sales_report.xlsx here</div>
+  </div>
+
+  <div class="file-info" id="fi-info"></div>
+  <div class="prog-wrap" id="pw"><div class="prog-lbl" id="pl">Uploading...</div><div class="prog-bar"><div class="prog-fill" id="pf"></div></div></div>
+  <div class="status" id="st"></div>
+  <button class="btn-up" id="bu" disabled onclick="go()">📤  UPLOAD & UPDATE DASHBOARD</button>
+  <a class="btn-view" href="https://firerocknett.netlify.app" target="_blank">🌐  View Live Dashboard</a>
+</div>
+<div class="foot">firerocknett.netlify.app · Updates in 2–3 min after upload</div>
+
+<script>
+let file = null;
+const dz=document.getElementById('dz'), fi=document.getElementById('fi');
+const fiInfo=document.getElementById('fi-info'), pw=document.getElementById('pw');
+const pf=document.getElementById('pf'), pl=document.getElementById('pl');
+const bu=document.getElementById('bu'), st=document.getElementById('st');
+
+fi.onchange = e => setFile(e.target.files[0]);
+dz.ondragover = e => { e.preventDefault(); dz.classList.add('over'); };
+dz.ondragleave = () => dz.classList.remove('over');
+dz.ondrop = e => { e.preventDefault(); dz.classList.remove('over'); setFile(e.dataTransfer.files[0]); };
+
+function setFile(f) {
+  if (!f) return;
+  file = f;
+  fiInfo.style.display='block';
+  fiInfo.textContent = `✓ ${f.name} (${(f.size/1024).toFixed(0)} KB)`;
+  bu.disabled = false; st.style.display='none';
+}
+function prog(pct, lbl) { pw.style.display='block'; pf.style.width=pct+'%'; pl.textContent=lbl; }
+function showSt(type, msg) { st.className=`status ${type}`; st.textContent=msg; st.style.display='block'; }
+
+async function go() {
+  if (!file) return;
+  bu.disabled=true; st.style.display='none';
+  try {
+    prog(20,'Reading file...');
+    const ab = await file.arrayBuffer();
+    const b64 = btoa(String.fromCharCode(...new Uint8Array(ab)));
+    prog(60,'Uploading...');
+    const resp = await fetch('/.netlify/functions/upload', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({content: b64})
+    });
+    prog(100,'Complete!');
+    if (resp.ok) { showSt('ok','✅ Uploaded! Dashboard updates in 2–3 minutes.'); }
+    else { const e=await resp.json(); showSt('err',`❌ Failed: ${e.message||resp.status}`); }
+  } catch(e) { showSt('err',`❌ Error: ${e.message}`); }
+  finally { bu.disabled=false; }
+}
+</script>
+</body>
+</html>
