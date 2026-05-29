@@ -1,31 +1,31 @@
 {
-  "reportDate": "May 21, 2026",
+  "reportDate": "May 29, 2026",
   "workDaysMonth": 21,
-  "daysIn": 15,
-  "pctMonth": 0.7142857142857143,
+  "daysIn": 17,
+  "pctMonth": 0.8095238095238095,
   "workDaysYear": 254,
   "ytdDays": 100,
   "pctYear": 0.3937007874015748,
-  "mtdOrders": 867800,
-  "mtdPY": 1119500,
+  "mtdOrders": 925000,
+  "mtdPY": 1090000,
   "mtdQuota": 1479422,
-  "mtdPctQ": 0.5865804347914253,
-  "mtdFore": 1214920,
-  "forePct": 0.8212126087079954,
-  "ytdOrders": 5063000,
-  "ytdPY": 5657500,
-  "annualQuota": 0,
-  "backlog": 1420000,
-  "revMTD": 617000,
-  "revBgtMTD": 1618000,
-  "revPctMTD": 0.3813349814585908,
-  "revYTD": 4590000,
-  "revBgtYTD": 6800000,
-  "revPctYTD": 0.675,
+  "mtdPctQ": 0.625,
+  "mtdFore": 1295000,
+  "forePct": 0.875,
+  "ytdOrders": 5250000,
+  "ytdPY": 5254474,
+  "annualQuota": 15968852,
+  "backlog": 1380000,
+  "revMTD": 680000,
+  "revBgtMTD": 1617138,
+  "revPctMTD": 0.42,
+  "revYTD": 4750000,
+  "revBgtYTD": 6713948,
+  "revPctYTD": 0.708,
   "reps": [
     {
       "name": "ERIC BLASKOWSKI",
-      "mtd": 195000,
+      "mtd": 210425.58,
       "py": 267000,
       "quota": 352500,
       "pctQ": 0.5531914893617021,
@@ -36,7 +36,7 @@
     },
     {
       "name": "KEVIN KEITH",
-      "mtd": 185000,
+      "mtd": 212353.76,
       "py": 235000,
       "quota": 253000,
       "pctQ": 0.7312252964426877,
@@ -47,7 +47,7 @@
     },
     {
       "name": "THORNTON COLE",
-      "mtd": 245000,
+      "mtd": 271921.49,
       "py": 370000,
       "quota": 406000,
       "pctQ": 0.603448275862069,
@@ -58,7 +58,7 @@
     },
     {
       "name": "MICHAEL KUHLMAN",
-      "mtd": 8200,
+      "mtd": 8707.96,
       "py": 10000,
       "quota": 35000,
       "pctQ": 0.2342857142857143,
@@ -69,7 +69,7 @@
     },
     {
       "name": "HAMP BRILEY",
-      "mtd": 9500,
+      "mtd": 10432.84,
       "py": 7500,
       "quota": 65000,
       "pctQ": 0.1461538461538462,
@@ -80,7 +80,7 @@
     },
     {
       "name": "GRAYSON MOOREHEAD",
-      "mtd": 105000,
+      "mtd": 112927.37,
       "py": 32000,
       "quota": 113835,
       "pctQ": 0.9223876663592041,
@@ -91,7 +91,7 @@
     },
     {
       "name": "BEAU BOUTHILLIER",
-      "mtd": 7100,
+      "mtd": 8128.81,
       "py": 18000,
       "quota": 35000,
       "pctQ": 0.2028571428571428,
@@ -102,7 +102,7 @@
     },
     {
       "name": "SUZANNE HORST",
-      "mtd": 42000,
+      "mtd": 44635.09,
       "py": 101000,
       "quota": 110000,
       "pctQ": 0.3818181818181818,
@@ -113,7 +113,7 @@
     },
     {
       "name": "TIFFANY HASKEKER",
-      "mtd": 41000,
+      "mtd": 44607.56,
       "py": 51000,
       "quota": 79087,
       "pctQ": 0.5184164274785995,
@@ -239,11 +239,11 @@
       "mtd": 0,
       "quota": 0,
       "pctQ": 0,
-      "revMTD": 617000,
-      "revBgt": 1618000,
-      "revPct": 0.3813349814585908,
+      "revMTD": 680000,
+      "revBgt": 1617138,
+      "revPct": 0.42,
       "backlog": 0,
-      "revYTD": 4590000
+      "revYTD": 4750000
     }
   ],
   "revMonthly": [
@@ -405,5 +405,5 @@
       "v": 554600
     }
   ],
-  "lastUpdated": "2026-05-29 16:18 UTC"
+  "lastUpdated": "2026-05-29 16:25 UTC"
 }
