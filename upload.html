@@ -57,10 +57,10 @@
   <div class="drop-zone" id="dz">
     <input type="file" id="fi" accept=".xlsx,.xlsm,.xls">
     <div class="drop-icon">📊</div>
-    <div class="drop-text"><strong>Click to select</strong> or drag & drop<br>your sales_report.xlsx here</div>
+    <div class="drop-text"><strong>Click to select</strong> or drag & drop<br>your Excel file here</div>
   </div>
   <div class="file-info" id="finfo"></div>
-  <div class="pw" id="pw"><div class="pl" id="pl">Uploading...</div><div class="pb"><div class="pf" id="pf"></div></div></div>
+  <div class="pw" id="pw"><div class="pl" id="pl">Processing...</div><div class="pb"><div class="pf" id="pf"></div></div></div>
   <div class="st" id="st"></div>
   <button class="btn-up" id="bu" disabled onclick="go()">📤  UPLOAD & UPDATE DASHBOARD</button>
   <a class="btn-view" href="https://firerocknett.netlify.app" target="_blank">🌐  View Live Dashboard</a>
@@ -76,33 +76,81 @@ const dz=document.getElementById('dz'),fi=document.getElementById('fi');
 const finfo=document.getElementById('finfo'),pw=document.getElementById('pw');
 const pf=document.getElementById('pf'),pl=document.getElementById('pl');
 const bu=document.getElementById('bu'),st=document.getElementById('st');
+
 fi.onchange=e=>setFile(e.target.files[0]);
 dz.ondragover=e=>{e.preventDefault();dz.classList.add('over');};
 dz.ondragleave=()=>dz.classList.remove('over');
 dz.ondrop=e=>{e.preventDefault();dz.classList.remove('over');setFile(e.dataTransfer.files[0]);};
-function setFile(f){if(!f)return;file=f;finfo.style.display='block';finfo.textContent=`✓ ${f.name} (${(f.size/1024).toFixed(0)} KB)`;bu.disabled=false;st.style.display='none';}
+
+function setFile(f){
+  if(!f)return;
+  file=f;
+  finfo.style.display='block';
+  finfo.textContent=`✓ ${f.name} (${(f.size/1024).toFixed(0)} KB)`;
+  bu.disabled=false;
+  st.style.display='none';
+}
 function prog(p,l){pw.style.display='block';pf.style.width=p+'%';pl.textContent=l;}
 function show(t,m){st.className=`st ${t}`;st.textContent=m;st.style.display='block';}
+
+// Safe base64 encoding that handles large files without stack overflow
+function toBase64(arrayBuffer) {
+  const bytes = new Uint8Array(arrayBuffer);
+  const chunkSize = 8192;
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    const chunk = bytes.subarray(i, i + chunkSize);
+    binary += String.fromCharCode.apply(null, chunk);
+  }
+  return btoa(binary);
+}
+
 async function go(){
-  if(!file)return;bu.disabled=true;st.style.display='none';
+  if(!file)return;
+  bu.disabled=true;
+  st.style.display='none';
   try{
-    prog(20,'Reading file...');
-    const ab=await file.arrayBuffer();
-    const b64=btoa(String.fromCharCode(...new Uint8Array(ab)));
-    prog(45,'Connecting to GitHub...');
-    const h={'Authorization':'token '+_t(),'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'};
-    const g=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:h});
-    const ex=await g.json();
-    const sha=ex.sha||null;
-    prog(70,'Uploading...');
+    prog(15,'Reading file...');
+    const ab = await file.arrayBuffer();
+
+    prog(35,'Encoding file...');
+    // Use chunked encoding to avoid stack overflow on large files
+    const b64 = toBase64(ab);
+
+    prog(50,'Connecting to GitHub...');
+    const h={
+      'Authorization':'token '+_t(),
+      'Accept':'application/vnd.github.v3+json',
+      'Content-Type':'application/json'
+    };
+
+    let sha = null;
+    try {
+      const g = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{headers:h});
+      const ex = await g.json();
+      sha = ex.sha || null;
+    } catch(e) { sha = null; }
+
+    prog(70,'Uploading to GitHub...');
     const p={message:'Auto-update sales report',content:b64};
-    if(sha)p.sha=sha;
-    const r=await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{method:'PUT',headers:h,body:JSON.stringify(p)});
+    if(sha) p.sha=sha;
+
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`,{
+      method:'PUT',headers:h,body:JSON.stringify(p)
+    });
+
     prog(100,'Done!');
-    if(r.ok){show('ok','✅ Uploaded! Dashboard updates in 2–3 minutes.');}
-    else{const e=await r.json();show('er',`❌ Failed: ${e.message||r.status}`);}
-  }catch(e){show('er',`❌ Error: ${e.message}`);}
-  finally{bu.disabled=false;}
+    if(r.ok){
+      show('ok','✅ Uploaded! Dashboard updates in 2–3 minutes.');
+    } else {
+      const e=await r.json();
+      show('er',`❌ Failed: ${e.message||r.status}`);
+    }
+  } catch(e){
+    show('er',`❌ Error: ${e.message}`);
+  } finally {
+    bu.disabled=false;
+  }
 }
 </script>
 </body>
