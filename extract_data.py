@@ -3,7 +3,7 @@
 FireRock Dashboard Data Extractor
 Reads the daily Excel file and writes data.json for the dashboard
 """
-import json, sys, os
+import json, sys, os, zipfile
 from datetime import datetime
 
 try:
@@ -12,8 +12,41 @@ except ImportError:
     os.system('pip install openpyxl -q')
     from openpyxl import load_workbook
 
+
+class ExtractError(Exception):
+    """Raised when the input file or extracted data fails validation."""
+    pass
+
+
+def _check_real_xlsx(filepath):
+    """A real .xlsx is a zip archive. Catch CSVs/HTML login pages renamed to .xlsx
+    before openpyxl throws a cryptic BadZipFile."""
+    with open(filepath, 'rb') as fh:
+        head = fh.read(8)
+    if head[:2] != b'PK':
+        # Peek at the start to give a useful message (HTML login page, CSV, etc.)
+        with open(filepath, 'rb') as fh:
+            snippet = fh.read(200).decode('utf-8', 'replace').strip().replace('\n', ' ')
+        raise ExtractError(
+            f"'{filepath}' is not a real Excel file (no PK/zip signature). "
+            f"It's likely a CSV or an HTML page saved with an .xlsx extension. "
+            f"First bytes: {snippet[:120]!r}"
+        )
+
+
 def extract(filepath):
-    wb = load_workbook(filepath, data_only=True)
+    _check_real_xlsx(filepath)
+    try:
+        wb = load_workbook(filepath, data_only=True)
+    except zipfile.BadZipFile:
+        raise ExtractError(
+            f"'{filepath}' could not be opened as an Excel workbook. "
+            f"Confirm a real .xlsx was uploaded, not a CSV or login page."
+        )
+    if 'DASHBOARD' not in wb.sheetnames:
+        raise ExtractError(
+            f"Workbook has no 'DASHBOARD' sheet. Found: {wb.sheetnames}"
+        )
     ws = wb['DASHBOARD']
     wr = wb['REVENUE']
 
@@ -44,7 +77,7 @@ def extract(filepath):
         "forePct":       gc(ws,30,8),
         "ytdOrders":     gc(ws,30,14),
         "ytdPY":         gc(ws,30,15),
-        "annualQuota":   gc(ws,30,18),
+        "annualQuota":   gc(ws,30,19),   # FIXED: col 19 (S, "Annual Quota"), was 18 (R, "% Quota Trend")
         "backlog":       gc(ws,30,12),
         "revMTD":        gc(ws,45,10),
         "revBgtMTD":     gc(ws,45,11),
@@ -121,16 +154,56 @@ def extract(filepath):
         ]
 
     data['lastUpdated'] = datetime.now().strftime('%Y-%m-%d %H:%M UTC')
+
+    _validate(data)
     return data
+
+
+def _validate(data):
+    """Sanity checks. Fail loudly instead of writing nonsense the dashboard
+    will silently turn into a 615,000,000% tile."""
+    errors = []
+
+    aq = data['annualQuota']
+    ytd = data['ytdOrders']
+
+    # Annual quota must be a real dollar figure, not a percentage (the original bug).
+    if not isinstance(aq, (int, float)):
+        errors.append(f"annualQuota is not numeric: {aq!r}")
+    elif aq < 1_000_000:
+        errors.append(
+            f"annualQuota = {aq:,.2f} is implausibly small (< $1M). "
+            f"Likely reading the wrong column (a percentage), not 'Annual Quota'."
+        )
+    elif ytd and aq < ytd:
+        errors.append(
+            f"annualQuota ({aq:,.0f}) is less than YTD orders ({ytd:,.0f}) — impossible."
+        )
+
+    # A couple of cheap cross-checks on the other headline numbers.
+    if data['mtdOrders'] and data['mtdOrders'] < 0:
+        errors.append(f"mtdOrders is negative: {data['mtdOrders']}")
+    if not (0 <= data['pctMonth'] <= 1.5):
+        errors.append(f"pctMonth out of range: {data['pctMonth']}")
+
+    if errors:
+        raise ExtractError("Validation failed:\n  - " + "\n  - ".join(errors))
+
 
 if __name__ == '__main__':
     filepath = sys.argv[1] if len(sys.argv) > 1 else 'sales_report.xlsx'
     if not os.path.exists(filepath):
         print(f'File not found: {filepath}')
         sys.exit(1)
-    data = extract(filepath)
+    try:
+        data = extract(filepath)
+    except ExtractError as e:
+        print(f"ERROR: {e}")
+        sys.exit(1)
+    os.makedirs('data', exist_ok=True)
     with open('data/data.json', 'w') as f:
         json.dump(data, f, indent=2, default=str)
     print(f"✓ Extracted {len(data['reps'])} reps, {len(data['prods'])} products")
     print(f"✓ MTD Orders: ${data['mtdOrders']:,.0f}")
+    print(f"✓ Annual Quota: ${data['annualQuota']:,.0f}  (YTD {data['ytdOrders']/data['annualQuota']*100:.1f}% of annual)")
     print(f"✓ Written to data/data.json")
