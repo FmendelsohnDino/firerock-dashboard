@@ -1,32 +1,57 @@
 name: Update Dashboard Data
 
+# Only run when the spreadsheet or the extractor actually change.
+# (The bot's own data/data.json commits won't retrigger this, so no loops.)
 on:
   push:
     paths:
       - 'sales_report.xlsx'
-  workflow_dispatch:
+      - 'extract_data.py'
+  workflow_dispatch:        # lets you run it manually from the Actions tab
+
+permissions:
+  contents: write           # needed so the job can commit data/data.json
 
 jobs:
   extract:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out repo
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install dependencies
         run: pip install openpyxl
 
-      - name: Extract data from Excel
+      # If sales_report.xlsx isn't present (e.g. you just deleted it),
+      # skip the rest cleanly instead of failing the run.
+      - name: Check for spreadsheet
+        id: check
+        run: |
+          if [ -f sales_report.xlsx ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "No sales_report.xlsx present — nothing to extract. Skipping."
+          fi
+
+      - name: Extract data
+        if: steps.check.outputs.exists == 'true'
         run: python extract_data.py sales_report.xlsx
 
       - name: Commit updated data
+        if: steps.check.outputs.exists == 'true'
         run: |
-          git config --global user.email "dashboard@firerock.com"
-          git config --global user.name "FireRock Dashboard Bot"
+          git config user.name  "FireRock Dashboard Bot"
+          git config user.email "actions@users.noreply.github.com"
           git add data/data.json
-          git diff --staged --quiet || git commit -m "Auto-update dashboard data $(date +'%Y-%m-%d %H:%M')"
-          git push
+          if git diff --staged --quiet; then
+            echo "No data changes to commit."
+          else
+            git commit -m "Auto-update dashboard data $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git push
+          fi
