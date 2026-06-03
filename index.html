@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>FireRock | Live Sales Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+:root{--or:#E8602C;--dk:#1A1A1A;--md:#444;--lt:#888;--bd:#EAEAEA;--bg:#F6F6F4;--wh:#FFF;--gn:#1D9E75;--gnl:#E3F6EF;--rd:#E03E3E;--rdl:#FDEAEA;--yw:#F0A500;--ywl:#FEF6E4;--bl:#2E6BE6;--bll:#EAF0FD;--r:12px;--sh:0 1px 4px rgba(0,0,0,.07)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--dk);font-size:14px;-webkit-font-smoothing:antialiased}
+#ls{position:fixed;inset:0;background:var(--dk);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;gap:18px}
+.lm{width:44px;height:44px;background:var(--or);border-radius:10px;display:flex;align-items:center;justify-content:center}
+.lm svg{width:26px;height:26px;fill:#fff}
+.lb{width:220px;height:3px;background:#333;border-radius:2px;overflow:hidden}
+.lf{height:3px;background:var(--or);border-radius:2px;animation:lp 1.8s ease-in-out infinite}
+@keyframes lp{0%{width:0}60%{width:75%}100%{width:100%}}
+.ls2{font-size:11px;color:#666;font-family:'DM Mono',monospace}
+.hd{background:var(--dk);padding:0 16px;position:sticky;top:0;z-index:100}
+.hi{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:960px;margin:0 auto}
+.lo{display:flex;align-items:center;gap:10px}
+.lk{width:28px;height:28px;background:var(--or);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.lk svg{width:16px;height:16px;fill:#fff}
+.ln{font-size:13px;font-weight:600;color:#fff;letter-spacing:.04em}
+.ls3{font-size:11px;color:#888}
+.hr2{display:flex;align-items:center;gap:10px}
+.hdate{font-size:11px;color:#888;font-family:'DM Mono',monospace}
+.live-ind{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600}
+.live-ind::before{content:'';width:6px;height:6px;border-radius:50%;animation:pp 2s infinite}
+.live-ind.live{color:var(--gn)}.live-ind.live::before{background:var(--gn)}
+.live-ind.cached{color:var(--yw)}.live-ind.cached::before{background:var(--yw)}
+@keyframes pp{0%,100%{opacity:1}50%{opacity:.3}}
+.rb{background:none;border:1px solid #444;color:#888;border-radius:6px;padding:4px 10px;font-size:11px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s}
+.rb:hover{border-color:var(--or);color:var(--or)}
+.tb{background:var(--wh);border-bottom:1px solid var(--bd);position:sticky;top:52px;z-index:99}
+.ti{display:flex;max-width:960px;margin:0 auto;padding:0 16px}
+.tt{padding:12px 18px;font-size:13px;font-weight:500;color:var(--lt);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap}
+.tt.active{color:var(--or);border-bottom-color:var(--or)}
+.mn{max-width:960px;margin:0 auto;padding:16px}
+.tp{display:none}.tp.active{display:block}
+.st{font-size:11px;font-weight:600;color:var(--lt);letter-spacing:.08em;text-transform:uppercase;margin:20px 0 10px}
+.st:first-child{margin-top:0}
+.pb{background:var(--dk);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.pbl{font-size:11px;color:#888;font-weight:500;white-space:nowrap}
+.pt{flex:1;height:6px;background:#333;border-radius:3px;position:relative;overflow:visible}
+.pf{height:6px;background:var(--or);border-radius:3px;transition:width .8s ease}
+.pm{position:absolute;top:-4px;width:2px;height:14px;background:var(--gn);border-radius:1px}
+.pp2{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;font-family:'DM Mono',monospace}
+.pleg{display:flex;gap:12px;margin-top:6px}
+.pli{display:flex;align-items:center;gap:5px;font-size:10px;color:#888}
+.pld{width:8px;height:8px;border-radius:2px}
+.kg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+@media(min-width:600px){.kg{grid-template-columns:repeat(4,1fr)}.kg3{grid-template-columns:repeat(3,1fr)}}
+.kc{background:var(--wh);border-radius:var(--r);padding:14px;box-shadow:var(--sh)}
+.kl{font-size:10px;font-weight:600;color:var(--lt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.kv{font-size:20px;font-weight:700;color:var(--dk);line-height:1;font-family:'DM Mono',monospace}
+.ks{font-size:11px;color:var(--lt);margin-top:4px}
+.kb{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 7px;border-radius:20px;margin-top:5px}
+.bg{background:var(--gnl);color:var(--gn)}.br{background:var(--rdl);color:var(--rd)}.by{background:var(--ywl);color:var(--yw)}.bb{background:var(--bll);color:var(--bl)}
+.hband{background:var(--dk);border-radius:var(--r);padding:0;margin-bottom:16px;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden}
+.hbi{padding:14px 16px;text-align:center}
+.hbv{font-size:18px;font-weight:700;font-family:'DM Mono',monospace;color:#fff}
+.hbl{font-size:10px;color:#888;margin-top:3px;text-transform:uppercase;letter-spacing:.06em}
+.hbs{font-size:11px;margin-top:4px}
+.fc{background:var(--dk);border-radius:var(--r);padding:16px;margin-bottom:16px;color:#fff}
+.ft{font-size:11px;color:#888;font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.ftr{position:relative;height:10px;background:#333;border-radius:5px;margin:22px 0 10px}
+.fa{position:absolute;left:0;top:0;height:10px;background:var(--or);border-radius:5px;transition:width .8s ease}
+.fp2{position:absolute;top:0;height:10px;background:repeating-linear-gradient(45deg,#555,#555 3px,#444 3px,#444 6px);border-radius:0 5px 5px 0}
+.fmk{position:absolute;top:-10px;width:2px;height:30px;border-radius:1px}
+.fml{position:absolute;top:-22px;transform:translateX(-50%);font-size:9px;font-weight:600;white-space:nowrap}
+.fv{display:flex;justify-content:space-between;margin-top:10px}
+.fvi{text-align:center}
+.fvn{font-size:15px;font-weight:700;font-family:'DM Mono',monospace}
+.fvl{font-size:10px;color:#888;margin-top:2px}
+
+/* FORRESTER CHART */
+.fbc{background:var(--wh);border-radius:var(--r);padding:16px;box-shadow:var(--sh);margin-bottom:16px}
+.fbc-h{font-size:14px;font-weight:700;color:var(--dk);margin-bottom:2px}
+.fbc-s{font-size:11px;color:var(--lt);margin-bottom:16px}
+.fbc-r{display:grid;grid-template-columns:130px 1fr 50px;align-items:center;gap:8px;margin-bottom:11px}
+@media(max-width:480px){.fbc-r{grid-template-columns:90px 1fr 44px}}
+.fbc-ln{font-size:11px;font-weight:600;color:var(--dk);text-align:right;line-height:1.3}
+.fbc-ls{font-size:9px;color:var(--lt);margin-top:1px}
+.fbc-tr{position:relative;height:24px;background:#EEEEEC;border-radius:4px;overflow:visible}
+.fbc-fi{position:absolute;left:0;top:0;height:24px;border-radius:4px 0 0 4px;transition:width .9s cubic-bezier(.34,1.2,.64,1)}
+.fbc-pl{position:absolute;top:0;width:0;height:24px;border-left:2px dashed rgba(0,0,0,0.5)}
+.fbc-ft{position:absolute;top:-4px;width:3px;height:32px;background:var(--dk);border-radius:1px;z-index:2}
+.fbc-pp{font-size:13px;font-weight:700;font-family:'DM Mono',monospace}
+.fbc-div{border:none;border-top:2px solid var(--bd);margin:8px 0}
+.fbc-leg{display:flex;gap:16px;margin-top:10px;flex-wrap:wrap}
+.fbc-li{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--lt)}
+
+.as{background:var(--wh);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh);margin-bottom:16px}
+.at2{font-size:11px;font-weight:600;color:var(--lt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.ar{margin-bottom:11px}.ar:last-child{margin-bottom:0}
+.ah{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
+.an{font-size:12px;font-weight:600;color:var(--dk)}
+.anu{font-size:11px;color:var(--lt);font-family:'DM Mono',monospace}
+.atr{height:8px;background:var(--bd);border-radius:4px;position:relative;overflow:hidden}
+.af{height:8px;border-radius:4px;width:0;transition:width .8s cubic-bezier(.34,1.2,.64,1)}
+.apl{position:absolute;top:0;height:8px;width:2px;background:rgba(0,0,0,.2);border-radius:1px}
+.rt{background:var(--wh);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);margin-bottom:16px}
+.rr{display:grid;grid-template-columns:1fr auto;align-items:center;padding:10px 14px;border-bottom:1px solid var(--bd);gap:10px}
+.rr:last-child{border-bottom:none}
+.rr.rhd{background:var(--bg);padding:7px 14px}
+.urow{display:grid;grid-template-columns:1.4fr 1.5fr auto;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--bd)}
+.urow:last-child{border-bottom:none}
+.rn{font-size:13px;font-weight:600;color:var(--dk)}
+.rn.sm{font-size:10px;font-weight:600;color:var(--lt);text-transform:uppercase;letter-spacing:.06em}
+.rm{font-size:11px;color:var(--lt);margin-top:2px}
+.rright{text-align:right}
+.rv{font-size:14px;font-weight:700;font-family:'DM Mono',monospace;color:var(--dk)}
+.rp{font-size:11px;font-weight:600;margin-top:2px}
+.pg{color:var(--gn)}.pr{color:var(--rd)}.py{color:var(--yw)}
+.pgr{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+@media(min-width:600px){.pgr{grid-template-columns:repeat(3,1fr)}}
+.pc{background:var(--wh);border-radius:var(--r);padding:14px;box-shadow:var(--sh)}
+.pn{font-size:11px;font-weight:600;color:var(--lt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.pv2{font-size:18px;font-weight:700;font-family:'DM Mono',monospace;color:var(--dk)}
+.ps2{font-size:10px;color:var(--lt);margin-top:2px}
+.pbr{height:4px;background:var(--bd);border-radius:2px;margin-top:8px}
+.pbf{height:4px;border-radius:2px;width:0;transition:width .8s ease}
+.card{background:var(--wh);border-radius:var(--r);padding:14px 16px;box-shadow:var(--sh);margin-bottom:16px}
+.card-t{font-size:11px;font-weight:600;color:var(--lt);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.tr-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.tr-row:last-child{border-bottom:none}
+.tr-mo{font-size:12px;font-weight:600;width:32px;color:var(--md)}
+.tr-tr{flex:1;height:8px;background:var(--bd);border-radius:4px;overflow:hidden}
+.tr-fi{height:8px;border-radius:4px;width:0;transition:width .8s ease}
+.tr-vl{font-size:12px;font-weight:600;font-family:'DM Mono',monospace;min-width:82px;text-align:right}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+.sr{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--bd)}
+.sr:last-child{border-bottom:none}
+.sl{font-size:13px;color:var(--md)}
+.sv{font-size:13px;font-weight:600;font-family:'DM Mono',monospace;color:var(--dk)}
+</style>
+</head>
+<body>
+
+<div id="ls">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div class="lm"><svg viewBox="0 0 16 16"><path d="M8 1L1 6v9h5v-4h4v4h5V6z"/></svg></div>
+    <div style="font-size:20px;font-weight:700;color:#fff;letter-spacing:.04em">FIREROCK</div>
+  </div>
+  <div style="font-size:13px;color:#888">Loading live data from Excel...</div>
+  <div class="lb"><div class="lf"></div></div>
+  <div class="ls2" id="lst">Connecting...</div>
+</div>
+
+<div id="app" style="display:none">
+<div class="hd">
+  <div class="hi">
+    <div class="lo">
+      <div class="lk"><svg viewBox="0 0 16 16"><path d="M8 1L1 6v9h5v-4h4v4h5V6z"/></svg></div>
+      <div><div class="ln">FIREROCK</div><div class="ls3">Daily Sales Report</div></div>
+    </div>
+    <div class="hr2">
+      <div class="live-ind" id="live-ind">LIVE</div>
+      <div class="hdate" id="rdate">—</div>
+      <button class="rb" onclick="loadData()">↻ Refresh</button>
+    </div>
+  </div>
+</div>
+<div class="tb">
+  <div class="ti">
+    <button class="tt active" onclick="showTab('sales',this)">Sales</button>
+    <button class="tt" onclick="showTab('products',this)">Products</button>
+    <button class="tt" onclick="showTab('revenue',this)">Revenue</button>
+  </div>
+</div>
+<div class="mn">
+<div id="stale-banner" style="display:none;background:var(--ywl);color:#8a6d00;border:1px solid var(--yw);border-radius:var(--r);padding:10px 14px;margin-bottom:14px;font-size:12px;font-weight:600;line-height:1.4"></div>
+
+<!-- SALES -->
+<div id="tab-sales" class="tp active">
+  <div class="pb">
+    <div><div class="pbl">MONTH PACE</div><div style="font-size:10px;color:#666;margin-top:2px" id="pace-days">—</div></div>
+    <div style="flex:1">
+      <div class="pt"><div class="pf" id="pfm" style="width:0%"></div><div class="pm" id="pym" style="left:0%"></div></div>
+      <div class="pleg">
+        <div class="pli"><div class="pld" style="background:var(--or)"></div><span id="plm">Month</span></div>
+        <div class="pli"><div class="pld" style="background:var(--gn)"></div><span id="ply">YTD</span></div>
+      </div>
+    </div>
+    <div class="pp2" id="ppct">—</div>
+  </div>
+
+  <div class="kg">
+    <div class="kc"><div class="kl">MTD Orders</div><div class="kv" id="k-mtd">—</div><div class="ks" id="k-mtd-s">—</div><div class="kb" id="k-mtd-b">—</div></div>
+    <div class="kc"><div class="kl">MTD % Quota</div><div class="kv" id="k-qpct">—</div><div class="ks" id="k-qpct-s">—</div><div class="kb" id="k-qpct-b">—</div></div>
+    <div class="kc"><div class="kl">YTD Orders</div><div class="kv" id="k-ytd">—</div><div class="ks" id="k-ytd-s">—</div><div class="kb" id="k-ytd-b">—</div></div>
+    <div class="kc"><div class="kl">Backlog</div><div class="kv" id="k-bl">—</div><div class="ks">Pipeline balance</div><div class="kb bb">Active</div></div>
+  </div>
+
+  <div class="hband">
+    <div class="hbi"><div class="hbv" id="hb-fore">—</div><div class="hbl">Month Forecast</div><div class="hbs" id="hb-fore-s" style="color:var(--yw)">—</div></div>
+    <div class="hbi" style="border-left:1px solid #333;border-right:1px solid #333"><div class="hbv" id="hb-rev">—</div><div class="hbl">MTD Revenue</div><div class="hbs" id="hb-rev-s" style="color:var(--lt)">—</div></div>
+    <div class="hbi"><div class="hbv" id="hb-ytdq">—</div><div class="hbl">YTD % Annual Quota</div><div class="hbs" id="hb-ytdq-s" style="color:var(--lt)">—</div></div>
+  </div>
+
+  <div class="fc">
+    <div class="ft">Month-End Forecast vs Quota</div>
+    <div class="ftr">
+      <div class="fa" id="fa" style="width:0%"></div>
+      <div class="fp2" id="fp2" style="left:0%;width:0%"></div>
+      <div class="fmk" id="fm-q" style="background:var(--gn);left:100%"><div class="fml" style="color:var(--gn)" id="fm-ql">Quota</div></div>
+      <div class="fmk" id="fm-f" style="background:var(--yw);left:0%"><div class="fml" style="color:var(--yw)">Forecast</div></div>
+    </div>
+    <div class="fv">
+      <div class="fvi"><div class="fvn" style="color:var(--or)" id="fv-a">—</div><div class="fvl">Actual MTD</div></div>
+      <div class="fvi"><div class="fvn" style="color:var(--yw)" id="fv-f">—</div><div class="fvl">Projected</div></div>
+      <div class="fvi"><div class="fvn" style="color:var(--gn)" id="fv-q">—</div><div class="fvl">Quota</div></div>
+      <div class="fvi"><div class="fvn" style="color:#888" id="fv-p">—</div><div class="fvl">% of Quota</div></div>
+    </div>
+  </div>
+
+  <!-- FORRESTER CHART -->
+  <div class="fbc">
+    <div class="fbc-h" id="fbc-title">May MTD Sales vs May Quota</div>
+    <div class="fbc-s" id="fbc-sub">FireRock Building Materials</div>
+    <div id="fbc-rows"></div>
+    <hr class="fbc-div">
+    <div id="fbc-total"></div>
+    <div class="fbc-leg">
+      <div class="fbc-li"><svg width="18" height="4" style="margin-right:2px"><line x1="0" y1="2" x2="18" y2="2" stroke="#999" stroke-width="1.5" stroke-dasharray="3,2"/></svg><span id="fbc-pace-lbl">—</span> pace line</div>
+      <div class="fbc-li"><div style="width:3px;height:12px;background:var(--dk);border-radius:1px;display:inline-block;margin-right:2px"></div>Month-end forecast</div>
+      <div class="fbc-li"><div style="width:12px;height:12px;background:#EEEEEC;border-radius:2px;display:inline-block;margin-right:2px"></div>Quota</div>
+    </div>
+  </div>
+
+  <div class="st">Rep Scorecard — MTD &amp; YTD</div>
+  <div class="rt">
+    <div class="urow rhd" style="background:var(--bg);padding:7px 14px">
+      <div class="rn sm">Sales Rep</div>
+      <div class="rn sm">YTD vs Annual Quota</div>
+      <div class="rn sm" style="text-align:right">MTD · % Quota</div>
+    </div>
+    <div id="rep-rows"></div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div id="tab-products" class="tp">
+  <div class="kg">
+    <div class="kc"><div class="kl">Total MTD</div><div class="kv" id="p-mtd">—</div><div class="ks">Sales orders</div></div>
+    <div class="kc"><div class="kl">MTD % Quota</div><div class="kv" id="p-qpct">—</div><div class="ks" id="p-qsub">—</div></div>
+    <div class="kc"><div class="kl">Forecast</div><div class="kv" id="p-fore">—</div><div class="ks" id="p-fsub">—</div></div>
+    <div class="kc"><div class="kl">Total Backlog</div><div class="kv" id="p-bl">—</div><div class="ks">Pending orders</div></div>
+  </div>
+  <div class="st">MTD Orders vs Quota by Product</div>
+  <div class="as"><div class="at2" id="prod-att-t">—</div><div id="prod-att"></div></div>
+  <div class="st">Product Line Scorecards</div>
+  <div class="pgr" id="prod-cards"></div>
+  <div class="two">
+    <div>
+      <div class="st">Backlog by Product</div>
+      <div class="rt" id="bl-tbl"></div>
+    </div>
+    <div>
+      <div class="st">YTD Revenue Mix</div>
+      <div class="card"><canvas id="donut" width="180" height="180" style="display:block;margin:0 auto"></canvas><div id="donut-leg" style="margin-top:10px"></div></div>
+    </div>
+  </div>
+  <div class="st">Revenue vs Budget — MTD</div>
+  <div class="as"><div class="at2" id="rprod-t">—</div><div id="rprod-bars"></div></div>
+  <div class="st">YTD Revenue by Product</div>
+  <div class="as"><div class="at2">Year to Date Revenue</div><div id="ytd-rev-prod"></div></div>
+</div>
+
+<!-- REVENUE -->
+<div id="tab-revenue" class="tp">
+  <div class="kg">
+    <div class="kc"><div class="kl">MTD Revenue</div><div class="kv" id="r-mtd">—</div><div class="ks">w/ freight</div><div class="kb" id="r-mtd-b">—</div></div>
+    <div class="kc"><div class="kl">MTD Budget</div><div class="kv" id="r-bgt">—</div><div class="ks">Monthly target</div><div class="kb bb">Target</div></div>
+    <div class="kc"><div class="kl">YTD Revenue</div><div class="kv" id="r-ytd">—</div><div class="ks">w/ freight</div><div class="kb" id="r-ytd-b">—</div></div>
+    <div class="kc"><div class="kl">YTD Budget</div><div class="kv" id="r-ybgt">—</div><div class="ks">Year target</div><div class="kb bb">Budget</div></div>
+  </div>
+  <div class="fc">
+    <div class="ft">YTD Revenue vs Budget — <span id="r-pace-note">—</span> of year elapsed</div>
+    <div class="ftr">
+      <div class="fa" id="r-fa" style="width:0%"></div>
+      <div class="fmk" style="background:var(--yw)" id="r-pm"><div class="fml" style="color:var(--yw)">Pace</div></div>
+      <div class="fmk" style="background:var(--gn);left:100%"><div class="fml" style="color:var(--gn)" id="r-blab">Budget</div></div>
+    </div>
+    <div class="fv">
+      <div class="fvi"><div class="fvn" style="color:var(--or)" id="rv-a">—</div><div class="fvl">YTD Actual</div></div>
+      <div class="fvi"><div class="fvn" style="color:var(--yw)" id="rv-p">—</div><div class="fvl">Budget Pace</div></div>
+      <div class="fvi"><div class="fvn" style="color:var(--gn)" id="rv-b">—</div><div class="fvl">Full Budget</div></div>
+      <div class="fvi"><div class="fvn" style="color:#888" id="rv-pct">—</div><div class="fvl">% of Budget</div></div>
+    </div>
+  </div>
+  <div class="st">Monthly Revenue Trend — 2026</div>
+  <div class="card"><div class="card-t">Total Revenue by Month (w/ Freight)</div><div id="rev-trend"></div></div>
+  <div class="st">YTD Revenue by Rep</div>
+  <div class="as"><div class="at2">Cumulative Revenue — Jan through May 2026</div><div id="rev-rep-bars"></div></div>
+  <div class="st">Monthly Revenue by Rep</div>
+  <div style="overflow-x:auto;margin-bottom:16px"><table id="rev-tbl" style="width:100%;border-collapse:collapse;background:var(--wh);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);font-size:12px;min-width:500px"></table></div>
+  <div class="two">
+    <div>
+      <div class="st">Revenue vs Budget by Product</div>
+      <div class="as"><div class="at2" id="rprod-mtd-t">—</div><div id="rprod-mtd"></div></div>
+    </div>
+    <div>
+      <div class="st">Revenue Key Stats</div>
+      <div class="card" id="rev-stats"></div>
+    </div>
+  </div>
+</div>
+</div><!-- /mn -->
+</div><!-- /app -->
+
+<script>
+// No authentication required — dashboard is public
+
+// ── HARDCODED FALLBACK (from verified Excel read May 21 2026) ──────────────
+// Used instantly while API loads, and as fallback if API fails
+const FALLBACK = {
+  reportDate:'May 21, 2026', workDaysMonth:21, daysIn:15, pctMonth:0.7143,
+  workDaysYear:254, ytdDays:100, pctYear:0.3937,
+  mtdOrders:841178, mtdPY:1114292, mtdQuota:1479422, mtdPctQ:0.5686,
+  mtdFore:1177650, forePct:0.7960,
+  ytdOrders:5076457, ytdPY:5254474, annualQuota:16293852, backlog:1403017,
+  revMTD:595950, revBgtMTD:1617138, revPctMTD:0.3685,
+  revYTD:4538928, revBgtYTD:6713948, revPctYTD:0.6760,
+  reps:[
+    {name:'ERIC BLASKOWSKI',   mtd:203881, py:267483, quota:352500, pctQ:0.5784, fore:285434, forePct:0.8097, ytd:1119348, annQ:3500000},
+    {name:'KEVIN KEITH',       mtd:173447, py:232669, quota:253000, pctQ:0.6856, fore:242826, forePct:0.9598, ytd:1126113, annQ:2566000},
+    {name:'THORNTON COLE',     mtd:234020, py:365540, quota:406000, pctQ:0.5764, fore:327628, forePct:0.8070, ytd:1533379, annQ:4522000},
+    {name:'MICHAEL KUHLMAN',   mtd:7665,   py:10261,  quota:35000,  pctQ:0.2190, fore:10730,  forePct:0.3066, ytd:51293,   annQ:1120000},
+    {name:'HAMP BRILEY',       mtd:8835,   py:7625,   quota:65000,  pctQ:0.1359, fore:12369,  forePct:0.1903, ytd:146696,  annQ:600000},
+    {name:'GRAYSON MOOREHEAD', mtd:97381,  py:32240,  quota:113835, pctQ:0.8555, fore:136334, forePct:1.1976, ytd:356900,  annQ:874656},
+    {name:'BEAU BOUTHILLIER',  mtd:6719,   py:18413,  quota:35000,  pctQ:0.1920, fore:9406,   forePct:0.2688, ytd:53336,   annQ:874656},
+    {name:'SUZANNE HORST',     mtd:39943,  py:101343, quota:110000, pctQ:0.3631, fore:55920,  forePct:0.5084, ytd:217468,  annQ:946000},
+    {name:'TIFFANY HASKEKER',  mtd:39238,  py:51089,  quota:79087,  pctQ:0.4961, fore:54934,  forePct:0.6946, ytd:272457,  annQ:965540},
+    {name:'TOTAL FIREROCK SALES TEAM', mtd:811129, py:1086662, quota:1449422, pctQ:0.5596, fore:1135581, forePct:0.7831, ytd:4876991, annQ:15968852},
+  ],
+  prods:[
+    {name:'FIREPLACE/PP', mtd:562070, quota:922307, pctQ:0.6094, revMTD:402106, revBgt:1034926, revPct:0.3885, backlog:714810, revYTD:3170931},
+    {name:'PAVER/PP',     mtd:138585, quota:345615, pctQ:0.4010, revMTD:90354,  revBgt:346129,  revPct:0.2610, backlog:515457, revYTD:710696},
+    {name:'ROOFING',      mtd:56385,  quota:54500,  pctQ:1.0346, revMTD:0,      revBgt:24961,   revPct:0,      backlog:0,      revYTD:32032},
+    {name:'FLOORING',     mtd:0,      quota:57000,  pctQ:0,      revMTD:10715,  revBgt:27961,   revPct:0.3832, backlog:0,      revYTD:109837},
+    {name:'INSTALLATION', mtd:84138,  quota:100000, pctQ:0.8414, revMTD:48239,  revBgt:99999,   revPct:0.4824, backlog:159342, revYTD:243378},
+    {name:'SWD',          mtd:0,      quota:0,      pctQ:0,      revMTD:0,      revBgt:0,       revPct:0,      backlog:16544,  revYTD:0},
+    {name:'TOTAL',        mtd:841178, quota:1479422, pctQ:0.5686, revMTD:551414, revBgt:1533976, revPct:0.3595, backlog:1406153,revYTD:4266874},
+    {name:'FREIGHT',      mtd:0,      quota:0,      pctQ:0,      revMTD:44536,  revBgt:83162,   revPct:0.5355, backlog:0,      revYTD:272054},
+    {name:'TOTAL W/ FREIGHT', mtd:841178, quota:0,  pctQ:0,      revMTD:595950, revBgt:1617138, revPct:0.3685, backlog:1406153,revYTD:4538928},
+  ],
+  revMonthly:[
+    {name:'ERIC BLASKOWSKI',   jan:220319, feb:130476, mar:218696, apr:315912, may:114558, total:999961},
+    {name:'KEVIN KEITH',       jan:128028, feb:115271, mar:218671, apr:373184, may:90974,  total:926128},
+    {name:'THORNTON COLE',     jan:255802, feb:89456,  mar:272940, apr:374152, may:143030, total:1135380},
+    {name:'MICHAEL KUHLMAN',   jan:9661,   feb:9098,   mar:11340,  apr:14075,  may:7119,   total:51293},
+    {name:'HAMP BRILEY',       jan:32108,  feb:18996,  mar:27408,  apr:31426,  may:8758,   total:118696},
+    {name:'GRAYSON MOOREHEAD', jan:35726,  feb:48012,  mar:75034,  apr:100348, may:97759,  total:356879},
+    {name:'BEAU BOUTHILLIER',  jan:12480,  feb:6272,   mar:11712,  apr:11360,  may:11512,  total:53336},
+    {name:'SUZANNE HORST',     jan:57867,  feb:27408,  mar:40800,  apr:51626,  may:39808,  total:217509},
+    {name:'TIFFANY HASKEKER',  jan:49493,  feb:40800,  mar:54992,  apr:88334,  may:38838,  total:272457},
+    {name:'Grand Total',       jan:861692, feb:601675, mar:987824, apr:1264270,may:551414, total:4266875},
+  ],
+  monthTotals:[
+    {mo:'Jan',v:861692},{mo:'Feb',v:601675},{mo:'Mar',v:987824},{mo:'Apr',v:1264270},{mo:'May',v:595950}
+  ]
+};
+
+let DATA = {};
+
+const DATA_URL = 'https://raw.githubusercontent.com/FmendelsohnDino/firerock-dashboard/main/data/data.json';
+
+async function init() {
+  // Show fallback immediately so dashboard is never blank
+  DATA = JSON.parse(JSON.stringify(FALLBACK));
+  renderAll();
+  document.getElementById('ls').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  // Then try to load live data from GitHub
+  await loadData();
+}
+
+async function loadData() {
+  const ind = document.getElementById('live-ind');
+  ind.textContent = 'UPDATING...'; ind.className = 'live-ind cached';
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('GitHub fetch failed: ' + res.status);
+    const json = await res.json();
+    if (json.status === 'pending') {
+      ind.textContent = 'CACHED'; ind.className = 'live-ind cached';
+      return;
+    }
+    // Merge live data over fallback
+    DATA = Object.assign(JSON.parse(JSON.stringify(FALLBACK)), json);
+    renderAll();
+    ind.textContent = 'LIVE';
+    ind.className = 'live-ind live';
+    if (json.lastUpdated) {
+      document.getElementById('rdate').textContent = 'Updated: ' + json.lastUpdated;
+    }
+    if (json.reportDate) {
+      document.getElementById('rdate').textContent = json.reportDate;
+    }
+  } catch(e) {
+    console.warn('GitHub data fetch failed, using fallback:', e.message);
+    ind.textContent = 'CACHED'; ind.className = 'live-ind cached';
+  }
+}
+
+
+
+// ── FORMAT ──
+const fK=n=>{n=Number(n);if(isNaN(n))return '—';if(!n)return '$0';const a=Math.abs(n);if(a>=1e6)return '$'+(n/1e6).toFixed(2)+'M';if(a>=1e3)return '$'+Math.round(n/1e3)+'K';return '$'+Math.round(n).toLocaleString()};
+const fF=n=>'$'+Math.round(n||0).toLocaleString();
+const fP=n=>((n||0)*100).toFixed(1)+'%';
+const pCol=p=>p>=.7?'var(--gn)':p>=.4?'var(--yw)':'var(--rd)';
+const bCls=p=>p>=.7?'bg':p>=.4?'by':'br';
+const tc=s=>(s||'').split(' ').map(w=>w[0].toUpperCase()+w.slice(1).toLowerCase()).join(' ');
+const moName=s=>({Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'}[(s||'').trim().slice(0,3)]||'This Month');
+function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v||'—';}
+function setH(id,v){const e=document.getElementById(id);if(e)e.innerHTML=v||'';}
+function updateStaleBanner(d){
+  const el=document.getElementById('stale-banner'); if(!el) return;
+  const rd=d.reportDate?new Date(d.reportDate):null;
+  if(!rd||isNaN(rd.getTime())){el.style.display='none';return;}
+  const days=Math.floor((Date.now()-rd.getTime())/86400000);
+  if(days>=2){
+    el.style.display='block';
+    el.textContent=`⚠ Showing data as of ${d.reportDate} — about ${days} days old. The latest daily report may not have been uploaded yet.`;
+  } else { el.style.display='none'; }
+}
+
+const REP_COLORS = {
+  'GRAYSON MOOREHEAD':'#5B9BD5','KEVIN KEITH':'#5B9BD5','ERIC BLASKOWSKI':'#C4866A',
+  'THORNTON COLE':'#7BB8A0','TIFFANY HASKEKER':'#E8A87C','SUZANNE HORST':'#C47E8A',
+  'HAMP BRILEY':'#B8A0C4','BEAU BOUTHILLIER':'#A0B4C4','MICHAEL KUHLMAN':'#C4B47E',
+  'TOTAL FIREROCK SALES TEAM':'#4A4A9C','TOTAL FIREROCK SALES':'#4A4A9C'
+};
+const PROD_COLORS = {'FIREPLACE/PP':'#E8602C','PAVER/PP':'#2E6BE6','ROOFING':'#1D9E75','FLOORING':'#F0A500','INSTALLATION':'#5B9BD5','SWD':'#888','FREIGHT':'#aaa'};
+const PROD_EMOJI  = {'FIREPLACE/PP':'🔥','PAVER/PP':'🪨','ROOFING':'🏠','FLOORING':'🪵','INSTALLATION':'🔧'};
+
+function renderAll(){ renderSales(); renderProducts(); renderRevenue(); }
+
+function renderSales() {
+  const d=DATA, pm=d.pctMonth||.714, py=d.pctYear||.394;
+  const early = !!(d.daysIn && d.daysIn < 5);
+  if(d.reportDate) document.getElementById('rdate').textContent = d.reportDate;
+  updateStaleBanner(d);
+
+  // Pace
+  set('pace-days',`${d.daysIn} of ${d.workDaysMonth} working days`);
+  document.getElementById('pfm').style.width=(pm*100)+'%';
+  document.getElementById('pym').style.left=(py*100)+'%';
+  set('ppct',Math.round(pm*100)+'%');
+  set('plm',`Month (${Math.round(pm*100)}%)`);
+  set('ply',`YTD (${Math.round(py*100)}%)`);
+
+  // KPIs
+  const vsY=d.mtdPY?(d.mtdOrders-d.mtdPY)/d.mtdPY:0;
+  set('k-mtd',fK(d.mtdOrders)); set('k-mtd-s',`vs ${fK(d.mtdPY)} prior year`);
+  setH('k-mtd-b',`<span class="kb ${vsY>=0?'bg':'by'}">${vsY>=0?'↑':'↓'} ${Math.abs(Math.round(vsY*100))}% vs PY</span>`);
+  set('k-qpct',fP(d.mtdPctQ)); set('k-qpct-s',`${fK(d.mtdQuota)} target`);
+  const paceGap=(d.mtdPctQ-pm)*100;
+  setH('k-qpct-b',`<span class="kb ${paceGap>=0?'bg':'by'}">${paceGap>=0?'On pace +':'Behind '}${Math.abs(paceGap).toFixed(1)} pts</span>`);
+  const ytdVsPY=d.ytdPY?(d.ytdOrders-d.ytdPY)/d.ytdPY:0;
+  set('k-ytd',fK(d.ytdOrders)); set('k-ytd-s',`${fP(d.ytdPY?d.ytdOrders/d.ytdPY:0)} of prior year`);
+  setH('k-ytd-b',`<span class="kb ${ytdVsPY>=0?'bg':'by'}">${ytdVsPY>=0?'↑':'↓'} vs PY</span>`);
+  set('k-bl',fK(d.backlog));
+
+  // Highlight band
+  set('hb-fore',fK(d.mtdFore)); set('hb-fore-s',fP(d.forePct)+' of quota'+(early?' · run-rate (early)':''));
+  set('hb-rev',fK(d.revMTD)); set('hb-rev-s',fP(d.revPctMTD)+' of budget');
+  const ytdAnn=d.annualQuota?d.ytdOrders/d.annualQuota:0;
+  set('hb-ytdq',fP(ytdAnn)); set('hb-ytdq-s',fK(d.annualQuota)+' annual');
+
+  // Forecast slider
+  document.getElementById('fa').style.width=Math.min(d.mtdPctQ*100,100)+'%';
+  document.getElementById('fp2').style.left=Math.min(d.mtdPctQ*100,100)+'%';
+  document.getElementById('fp2').style.width=Math.max(0,(d.forePct-d.mtdPctQ)*100)+'%';
+  document.getElementById('fm-f').style.left=Math.min(d.forePct*100,100)+'%';
+  set('fm-ql',`Quota ${fK(d.mtdQuota)}`);
+  set('fv-a',fK(d.mtdOrders)); set('fv-f',fK(d.mtdFore)); set('fv-q',fK(d.mtdQuota)); set('fv-p',fP(d.forePct));
+
+  // Chart info
+  set('fbc-title',`${moName(d.reportDate)} MTD Sales vs ${moName(d.reportDate)} Quota`);
+  set('fbc-pace-lbl',`${Math.round(pm*100)}%`);
+  set('fbc-sub',`As of ${d.daysIn} of ${d.workDaysMonth} working days (${fP(pm)} of month)  ·  Team forecast at month-end: ${fF(d.mtdFore)}${early?'  ·  ⚠ run-rate forecast is volatile this early in the month':''}`);
+
+  // Forrester chart — sorted by pctQ desc
+  const reps = d.reps.filter(r=>r.name&&!r.name.includes('TOTAL'));
+  const sorted = [...reps].sort((a,b)=>b.pctQ-a.pctQ);
+  const total  = d.reps.find(r=>r.name&&r.name.includes('TOTAL'));
+
+  document.getElementById('fbc-rows').innerHTML = sorted.map((r,idx)=>{
+    const col=REP_COLORS[r.name]||'#C4866A';
+    const pct=r.quota>0?Math.min(r.pctQ*100,100):0;
+    const fpct=r.quota>0?Math.min((r.fore/r.quota)*100,105):0;
+    const lead=idx===0&&r.pctQ>0;
+    return `<div class="fbc-r" style="${lead?'background:linear-gradient(90deg,rgba(232,96,44,.10),transparent);border-radius:6px':''}">
+      <div><div class="fbc-ln">${tc(r.name)}${lead?" <span style='color:var(--or);font-size:9px'>▲ pace leader</span>":''}</div><div class="fbc-ls">${fF(r.mtd)} of ${fK(r.quota)}</div></div>
+      <div class="fbc-tr">
+        <div style="position:absolute;left:0;top:0;height:24px;width:${pm*100}%;background:rgba(0,0,0,0.05)"></div>
+        <div class="fbc-fi" style="width:${pct}%;background:${col}"></div>
+        <div class="fbc-pl" style="left:${pm*100}%"></div>
+        <div class="fbc-ft" style="left:${fpct}%;opacity:${early?0.4:1}"></div>
+      </div>
+      <div class="fbc-pp" style="color:${pCol(r.pctQ)}">${fP(r.pctQ)}</div>
+    </div>`;
+  }).join('');
+
+  if(total){
+    const tpct=total.quota>0?Math.min(total.pctQ*100,100):0;
+    const tfpct=total.quota>0?Math.min((total.fore/total.quota)*100,105):0;
+    document.getElementById('fbc-total').innerHTML=`<div class="fbc-r">
+      <div><div class="fbc-ln" style="font-weight:700">TEAM TOTAL</div><div class="fbc-ls">${fF(total.mtd)} of ${fK(total.quota)}</div></div>
+      <div class="fbc-tr">
+        <div style="position:absolute;left:0;top:0;height:24px;width:${pm*100}%;background:rgba(0,0,0,0.05)"></div>
+        <div class="fbc-fi" style="width:${tpct}%;background:#4A4A9C"></div>
+        <div class="fbc-pl" style="left:${pm*100}%"></div>
+        <div class="fbc-ft" style="left:${tfpct}%;opacity:${early?0.4:1}"></div>
+      </div>
+      <div class="fbc-pp" style="color:#4A4A9C;font-weight:700">${fP(total.pctQ)}</div>
+    </div>`;
+  }
+
+  // Unified rep grid: MTD scorecard + inline YTD-vs-annual bar
+  const py2=d.pctYear||.394;
+  document.getElementById('rep-rows').innerHTML=[...sorted,total].filter(Boolean).map(r=>{
+    const isT=r.name.includes('TOTAL');
+    const cls=r.pctQ>=.7?'pg':r.pctQ>=.4?'py':'pr';
+    const ann=r.annQ||(r.quota*(d.workDaysYear/(d.workDaysMonth||21)));
+    const yp=ann>0?r.ytd/ann:0;
+    return `<div class="urow" style="${isT?'background:#F9F9F7;border-top:2px solid var(--bd)':''}">
+      <div><div class="rn" style="${isT?'font-weight:700':''}">${tc(r.name)}</div><div class="rm">Forecast ${fK(r.fore)} · PY ${fK(r.py)}</div></div>
+      <div>
+        <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--lt);margin-bottom:3px"><span>${fK(r.ytd)} YTD</span><span>${fP(yp)} of annual</span></div>
+        <div class="atr"><div class="af" style="width:${Math.min(yp*100,100)}%;background:${pCol(yp)}"></div><div class="apl" style="left:${py2*100}%"></div></div>
+      </div>
+      <div class="rright"><div class="rv" style="${isT?'color:var(--or)':''}">${fF(r.mtd)}</div><div class="rp ${cls}">${fP(r.pctQ)} quota</div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderProducts() {
+  const d=DATA, pm=d.pctMonth||.714;
+  const prods=d.prods.filter(p=>p.name&&!['TOTAL','SWD','OTHER','FREIGHT','TOTAL W/ FREIGHT'].includes(p.name));
+  set('p-mtd',fK(d.mtdOrders)); set('p-qpct',fP(d.mtdPctQ)); set('p-qsub',`of ${fK(d.mtdQuota)}`);
+  set('p-fore',fK(d.mtdFore)); set('p-fsub',fP(d.forePct)+' of quota'); set('p-bl',fK(d.backlog));
+  set('prod-att-t',`${moName(d.reportDate)} MTD Orders vs Quota (${Math.round(pm*100)}% of month elapsed)`);
+
+  document.getElementById('prod-att').innerHTML=prods.map(p=>`<div class="ar">
+    <div class="ah"><span class="an">${PROD_EMOJI[p.name]||''} ${tc(p.name)}</span><span class="anu">${fK(p.mtd)} / ${fK(p.quota)}</span></div>
+    <div class="atr"><div class="af" style="width:${p.quota>0?Math.min(p.pctQ*100,100):0}%;background:${PROD_COLORS[p.name]||'#888'}"></div><div class="apl" style="left:${pm*100}%"></div></div>
+  </div>`).join('');
+
+  document.getElementById('prod-cards').innerHTML=prods.map(p=>`<div class="pc">
+    <div class="pn">${p.name}</div><div class="pv2">${fK(p.mtd)}</div>
+    <div class="ps2">MTD · YTD Rev ${fK(p.revYTD)}</div>
+    <div class="pbr"><div class="pbf" style="width:${p.quota>0?Math.min(p.pctQ*100,100):0}%;background:${PROD_COLORS[p.name]||'#888'}"></div></div>
+    <div style="margin-top:6px"><span class="kb ${bCls(p.pctQ)}">${p.quota>0?fP(p.pctQ):'—'} quota</span></div>
+  </div>`).join('');
+
+  const bps=d.prods.filter(p=>p.backlog>0&&p.name!=='TOTAL'&&p.name!=='TOTAL W/ FREIGHT');
+  document.getElementById('bl-tbl').innerHTML=
+    '<div class="rr rhd"><div class="rn sm">Product</div><div style="font-size:10px;font-weight:600;color:var(--lt);text-transform:uppercase;text-align:right">Balance</div></div>'+
+    bps.map((p,i)=>`<div class="rr"><div><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${PROD_COLORS[p.name]||'#888'};margin-right:6px"></span>${tc(p.name)}</div><div class="rv">${fF(p.backlog)}</div></div>`).join('')+
+    `<div class="rr" style="background:#F9F9F7;border-top:2px solid var(--bd)"><div style="font-weight:700">Total</div><div class="rv" style="color:var(--or)">${fF(d.backlog)}</div></div>`;
+
+  // Donut
+  const c=document.getElementById('donut'),ctx=c?.getContext('2d');
+  if(ctx){
+    const total=prods.reduce((s,p)=>s+p.revYTD,0);
+    ctx.clearRect(0,0,180,180);
+    let ang=-Math.PI/2;
+    prods.filter(p=>p.revYTD>0).forEach(p=>{
+      const sl=(p.revYTD/total)*Math.PI*2;
+      ctx.beginPath();ctx.moveTo(90,90);ctx.arc(90,90,75,ang,ang+sl);ctx.closePath();
+      ctx.fillStyle=PROD_COLORS[p.name]||'#888';ctx.fill();ang+=sl;
+    });
+    ctx.beginPath();ctx.arc(90,90,45,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();
+    ctx.fillStyle='#1A1A1A';ctx.font='bold 11px DM Sans,sans-serif';ctx.textAlign='center';
+    ctx.fillText(fK(total),90,86);ctx.font='9px DM Sans,sans-serif';ctx.fillStyle='#888';ctx.fillText('YTD Rev',90,100);
+    document.getElementById('donut-leg').innerHTML=prods.filter(p=>p.revYTD>0).map(p=>`
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:11px">
+        <div style="width:10px;height:10px;border-radius:2px;background:${PROD_COLORS[p.name]||'#888'};flex-shrink:0"></div>
+        <div style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${tc(p.name)}</div>
+        <div style="font-weight:600;font-family:'DM Mono',monospace;white-space:nowrap;flex-shrink:0">${fP(p.revYTD/total)}</div>
+      </div>`).join('');
+  }
+
+  set('rprod-t',`vs Monthly Budget (${Math.round(pm*100)}% elapsed)`);
+  document.getElementById('rprod-bars').innerHTML=prods.filter(p=>p.revBgt>0).map(p=>`<div class="ar">
+    <div class="ah"><span class="an">${tc(p.name)}</span><span class="anu">${fK(p.revMTD)} / ${fK(p.revBgt)}</span></div>
+    <div class="atr"><div class="af" style="width:${Math.min(p.revPct*100,100)}%;background:${PROD_COLORS[p.name]||'#888'}"></div><div class="apl" style="left:${pm*100}%"></div></div>
+  </div>`).join('');
+
+  const mxR=Math.max(...prods.map(p=>p.revYTD));
+  document.getElementById('ytd-rev-prod').innerHTML=[...prods].sort((a,b)=>b.revYTD-a.revYTD).map(p=>`<div class="ar">
+    <div class="ah"><span class="an">${tc(p.name)}</span><span class="anu">${fF(p.revYTD)}</span></div>
+    <div class="atr"><div class="af" style="width:${mxR>0?p.revYTD/mxR*100:0}%;background:${PROD_COLORS[p.name]||'#888'}"></div></div>
+  </div>`).join('');
+}
+
+function renderRevenue() {
+  const d=DATA, py=d.pctYear||.394, pm=d.pctMonth||.714;
+  set('r-mtd',fK(d.revMTD)); setH('r-mtd-b',`<span class="kb ${bCls(d.revPctMTD)}">${fP(d.revPctMTD)} of budget</span>`);
+  set('r-bgt',fK(d.revBgtMTD)); set('r-ytd',fK(d.revYTD));
+  setH('r-ytd-b',`<span class="kb ${bCls(d.revPctYTD)}">${fP(d.revPctYTD)} of budget</span>`);
+  set('r-ybgt',fK(d.revBgtYTD));
+  set('r-pace-note',fP(py));
+  document.getElementById('r-fa').style.width=Math.min(d.revPctYTD*100,100)+'%';
+  document.getElementById('r-pm').style.left=(py*100)+'%';
+  set('r-blab',`Budget ${fK(d.revBgtYTD)}`);
+  set('rv-a',fK(d.revYTD)); set('rv-p',fK(d.revBgtYTD*py)); set('rv-b',fK(d.revBgtYTD)); set('rv-pct',fP(d.revPctYTD));
+
+  const maxV=Math.max(...d.monthTotals.map(m=>m.v));
+  document.getElementById('rev-trend').innerHTML=d.monthTotals.map((m,i)=>`
+    <div class="tr-row"><div class="tr-mo">${m.mo}</div>
+    <div class="tr-tr"><div class="tr-fi" style="width:${m.v/maxV*100}%;background:${i===d.monthTotals.length-1?'var(--or)':'var(--bl)'}"></div></div>
+    <div class="tr-vl" style="${i===d.monthTotals.length-1?'color:var(--or)':''}">${fF(m.v)}${i===d.monthTotals.length-1?' <span style="font-size:9px;color:var(--lt)">MTD</span>':''}</div></div>`).join('');
+
+  const repRev=d.revMonthly.filter(r=>r.name&&r.name!=='Grand Total'&&r.name!=='HOUSE'&&r.total>0).sort((a,b)=>b.total-a.total);
+  const mxRR=Math.max(...repRev.map(r=>r.total));
+  const rCols=['#E8602C','#2E6BE6','#1D9E75','#F0A500','#9B59B6','#E74C3C','#888','#999','#555'];
+  document.getElementById('rev-rep-bars').innerHTML=repRev.map((r,i)=>`<div class="ar">
+    <div class="ah"><span class="an">${tc(r.name)}</span><span class="anu">${fF(r.total)}</span></div>
+    <div class="atr"><div class="af" style="width:${r.total/mxRR*100}%;background:${rCols[i]||'#888'}"></div></div>
+  </div>`).join('');
+
+  const salesReps=d.revMonthly.filter(r=>r.name&&r.name!=='Grand Total'&&r.name!=='HOUSE'&&r.name.toUpperCase()!=='SALES REP');
+  const gt=d.revMonthly.find(r=>r.name==='Grand Total');
+  document.getElementById('rev-tbl').innerHTML=`
+    <thead><tr style="background:var(--dk);color:#fff">
+      <th style="padding:8px 12px;text-align:left;font-size:11px;font-weight:600">Rep</th>
+      ${['Jan','Feb','Mar','Apr','May','YTD'].map(m=>`<th style="padding:8px 10px;text-align:right;font-size:11px;font-weight:600${m==='YTD'?';background:#333':''}">${m}</th>`).join('')}
+    </tr></thead>
+    <tbody>${salesReps.map((r,i)=>`<tr style="background:${i%2?'#FAFAFA':'#fff'}">
+      <td style="padding:7px 12px;font-size:12px;font-weight:600;white-space:nowrap">${tc(r.name)}</td>
+      ${[r.jan,r.feb,r.mar,r.apr,r.may].map(v=>`<td style="padding:7px 10px;text-align:right;font-size:11px;font-family:'DM Mono',monospace">${v?fK(v):'—'}</td>`).join('')}
+      <td style="padding:7px 10px;text-align:right;font-size:12px;font-weight:700;font-family:'DM Mono',monospace;background:#F6F6F4">${fK(r.total)}</td>
+    </tr>`).join('')}
+    ${gt?`<tr style="background:var(--dk)"><td style="padding:8px 12px;font-size:12px;font-weight:700;color:#fff">TOTAL</td>${[gt.jan,gt.feb,gt.mar,gt.apr,gt.may].map(v=>`<td style="padding:8px 10px;text-align:right;font-size:11px;font-family:'DM Mono',monospace;color:#fff">${fK(v)}</td>`).join('')}<td style="padding:8px 10px;text-align:right;font-size:12px;font-weight:700;font-family:'DM Mono',monospace;color:var(--or)">${fK(gt.total)}</td></tr>`:''}
+    </tbody>`;
+
+  const prods=d.prods.filter(p=>p.name&&!['TOTAL','SWD','OTHER','FREIGHT','TOTAL W/ FREIGHT'].includes(p.name)&&p.revBgt>0);
+  set('rprod-mtd-t',`vs Monthly Budget (${Math.round(pm*100)}% elapsed)`);
+  document.getElementById('rprod-mtd').innerHTML=prods.map(p=>`<div class="ar">
+    <div class="ah"><span class="an">${tc(p.name)}</span><span class="anu">${fK(p.revMTD)} / ${fK(p.revBgt)}</span></div>
+    <div class="atr"><div class="af" style="width:${Math.min(p.revPct*100,100)}%;background:${PROD_COLORS[p.name]||'#888'}"></div><div class="apl" style="left:${pm*100}%"></div></div>
+  </div>`).join('');
+
+  const gap=d.revBgtYTD-d.revYTD;
+  setH('rev-stats',`
+    <div class="sr"><span class="sl">MTD Revenue</span><span class="sv">${fF(d.revMTD)}</span></div>
+    <div class="sr"><span class="sl">MTD Budget</span><span class="sv">${fF(d.revBgtMTD)}</span></div>
+    <div class="sr"><span class="sl">MTD vs Budget</span><span class="sv" style="color:${d.revPctMTD>=.7?'var(--gn)':'var(--rd)'}">${fP(d.revPctMTD)}</span></div>
+    <div class="sr"><span class="sl">YTD Revenue</span><span class="sv">${fF(d.revYTD)}</span></div>
+    <div class="sr"><span class="sl">YTD Budget</span><span class="sv">${fF(d.revBgtYTD)}</span></div>
+    <div class="sr"><span class="sl">YTD Gap to Budget</span><span class="sv" style="color:${gap>0?'var(--rd)':'var(--gn)'}">${gap>0?'-':'+'}${fK(Math.abs(gap))}</span></div>`);
+}
+
+function showTab(n,btn){
+  document.querySelectorAll('.tp').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tt').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+n).classList.add('active');
+  if(btn) btn.classList.add('active');
+  setTimeout(()=>{
+    document.querySelectorAll('#tab-'+n+' .af,#tab-'+n+' .pf,#tab-'+n+' .fa,#tab-'+n+' .tr-fi,#tab-'+n+' .pbf,#tab-'+n+' .fbc-fi').forEach(el=>{
+      const w=el.style.width;el.style.width='0';
+      requestAnimationFrame(()=>requestAnimationFrame(()=>{el.style.width=w;}));
+    });
+    if(n==='products'){
+      const d=DATA,prods=d.prods?.filter(p=>p.name&&!['TOTAL','SWD','OTHER','FREIGHT','TOTAL W/ FREIGHT'].includes(p.name))||[];
+      const c=document.getElementById('donut'),ctx=c?.getContext('2d');
+      if(ctx&&prods.length){const total=prods.reduce((s,p)=>s+p.revYTD,0);ctx.clearRect(0,0,180,180);let ang=-Math.PI/2;prods.filter(p=>p.revYTD>0).forEach(p=>{const sl=(p.revYTD/total)*Math.PI*2;ctx.beginPath();ctx.moveTo(90,90);ctx.arc(90,90,75,ang,ang+sl);ctx.closePath();ctx.fillStyle=PROD_COLORS[p.name]||'#888';ctx.fill();ang+=sl;});ctx.beginPath();ctx.arc(90,90,45,0,Math.PI*2);ctx.fillStyle='#fff';ctx.fill();}
+    }
+  },80);
+}
+
+window.addEventListener('DOMContentLoaded', ()=>init());
+</script>
+</body>
+</html>
