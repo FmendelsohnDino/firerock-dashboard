@@ -248,15 +248,6 @@
   ],
   "revMonthly": [
     {
-      "name": "SALES REP",
-      "jan": "Jan",
-      "feb": "Feb",
-      "mar": "Mar",
-      "apr": "Apr",
-      "may": "May",
-      "total": "Grand Total"
-    },
-    {
       "name": "ELITE DEALS",
       "jan": 20883.4,
       "feb": 8092.18,
@@ -414,5 +405,91 @@
       "v": 551413.78
     }
   ],
-  "lastUpdated": "2026-06-03 16:35 UTC"
+  "orders": [
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150415",
+      "customer": "CAPITAL BRICK COMPANY",
+      "amount": 310,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150416",
+      "customer": "SITE ONE LANDSCAPE - BIRMINGHAM",
+      "amount": 3663,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150417",
+      "customer": "ALABAMA BRICK",
+      "amount": 3217,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150425",
+      "customer": "RUSSELL DO IT CENTER - ALEX CITY",
+      "amount": 8481,
+      "note": ""
+    },
+    {
+      "rep": "ERIC BLASKOWSKI",
+      "so": "FRKO150410",
+      "customer": "EXTREME CHIMNEYS",
+      "amount": 8358,
+      "note": ""
+    },
+    {
+      "rep": "ERIC BLASKOWSKI",
+      "so": "FRKO150420",
+      "customer": "DANIEL BRICK - 2",
+      "amount": 2800,
+      "note": "Prepay required"
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150418",
+      "customer": "CUSTOM - BILT CABINET AND SUPPLY",
+      "amount": 1377,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150423",
+      "customer": "OLD SOUTH BRICK & SUPPLY",
+      "amount": 3456,
+      "note": ""
+    },
+    {
+      "rep": "HAMP BRILEY",
+      "so": "FRKO150412",
+      "customer": "OBERFIELD'S",
+      "amount": 3065,
+      "note": ""
+    },
+    {
+      "rep": "BEAU BOUTHILLIER",
+      "so": "FRKO150419",
+      "customer": "BARKMAN CONCRETE LIMITED",
+      "amount": 2754,
+      "note": "Prepay required"
+    },
+    {
+      "rep": "WOODLAND DIRECT",
+      "so": "FRKO150426",
+      "customer": "WOODLAND DIRECT",
+      "amount": 184,
+      "note": ""
+    },
+    {
+      "rep": "HOUSE",
+      "so": "FRKO150413-P",
+      "customer": "PAVER SAMPLES",
+      "amount": 0,
+      "note": ""
+    }
+  ],
+  "lastUpdated": "2026-06-03 20:42 UTC"
 }
