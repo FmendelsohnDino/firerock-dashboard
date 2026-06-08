@@ -248,70 +248,70 @@
   ],
   "revMonthly": [
     {
+      "name": "ELITE DEALS",
+      "jan": 20883,
+      "feb": 8092,
+      "mar": 4558,
+      "apr": 11196,
+      "may": 3107,
+      "total": 47836
+    },
+    {
       "name": "ERIC BLASKOWSKI",
+      "jan": 172905,
+      "feb": 137415,
+      "mar": 165774,
+      "apr": 273320,
+      "may": 135546,
+      "total": 884961
+    },
+    {
+      "name": "KCB",
       "jan": 0,
-      "feb": 0,
+      "feb": 2084,
       "mar": 0,
       "apr": 0,
       "may": 0,
-      "total": 0
+      "total": 2084
     },
     {
       "name": "KEVIN KEITH",
+      "jan": 184893,
+      "feb": 151654,
+      "mar": 192333,
+      "apr": 311282,
+      "may": 86191,
+      "total": 926353
+    },
+    {
+      "name": "NET DIRECT",
       "jan": 0,
       "feb": 0,
-      "mar": 0,
+      "mar": 18017,
       "apr": 0,
       "may": 0,
-      "total": 0
+      "total": 18017
     },
     {
       "name": "THORNTON COLE",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
+      "jan": 291224,
+      "feb": 177307,
+      "mar": 342650,
+      "apr": 320793,
+      "may": 220976,
+      "total": 1352950
     },
     {
-      "name": "MICHAEL KUHLMAN",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
+      "name": "WOODLAND DIRECT",
+      "jan": 25028,
+      "feb": 7558,
+      "mar": 18627,
+      "apr": 13076,
+      "may": 10457,
+      "total": 74746
     },
     {
-      "name": "HAMP BRILEY",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
-    },
-    {
-      "name": "GRAYSON MOOREHEAD",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
-    },
-    {
-      "name": "BEAU BOUTHILLIER",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
-    },
-    {
-      "name": "SUZANNE HORST",
+      "name": "HOUSE",
       "jan": 0,
       "feb": 0,
       "mar": 0,
@@ -321,43 +321,88 @@
     },
     {
       "name": "TIFFANY HASKEKER",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
+      "jan": 44660,
+      "feb": 5262,
+      "mar": 88811,
+      "apr": 89737,
+      "may": 4713,
+      "total": 233183
+    },
+    {
+      "name": "SUZANNE HORST",
+      "jan": 66794,
+      "feb": 30664,
+      "mar": 69322,
+      "apr": 32238,
+      "may": 42208,
+      "total": 241226
+    },
+    {
+      "name": "MICHAEL KUHLMAN",
+      "jan": 15212,
+      "feb": 23667,
+      "mar": 7292,
       "apr": 0,
-      "may": 0,
-      "total": 0
+      "may": 11431,
+      "total": 57602
+    },
+    {
+      "name": "GRAYSON MOOREHEAD",
+      "jan": 30606,
+      "feb": 37989,
+      "mar": 46746,
+      "apr": 125490,
+      "may": 18780,
+      "total": 259611
+    },
+    {
+      "name": "HAMP BRILEY",
+      "jan": 1081,
+      "feb": 17672,
+      "mar": 28605,
+      "apr": 57050,
+      "may": 8378,
+      "total": 112786
+    },
+    {
+      "name": "BEAU BOUTHILLIER",
+      "jan": 8404,
+      "feb": 2311,
+      "mar": 5088,
+      "apr": 30087,
+      "may": 9628,
+      "total": 55518
     },
     {
       "name": "Grand Total",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
+      "jan": 861692,
+      "feb": 601675,
+      "mar": 987824,
+      "apr": 1264270,
+      "may": 551414,
+      "total": 4266874
     }
   ],
   "monthTotals": [
     {
       "mo": "Jan",
-      "v": 0
+      "v": 861692
     },
     {
       "mo": "Feb",
-      "v": 0
+      "v": 601675
     },
     {
       "mo": "Mar",
-      "v": 0
+      "v": 987824
     },
     {
       "mo": "Apr",
-      "v": 0
+      "v": 1264270
     },
     {
       "mo": "May",
-      "v": 0
+      "v": 551414
     }
   ],
   "orders": [
@@ -432,5 +477,5 @@
       "note": ""
     }
   ],
-  "lastUpdated": "2026-06-08 13:42 UTC"
+  "lastUpdated": "2026-06-08 14:04 UTC"
 }
