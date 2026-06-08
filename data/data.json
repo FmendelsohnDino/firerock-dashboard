@@ -1,27 +1,27 @@
 {
   "reportDate": "Jun 05, 2026",
-  "workDaysMonth": 0,
-  "daysIn": 0,
-  "pctMonth": 0,
-  "workDaysYear": 0,
-  "ytdDays": 0,
-  "pctYear": 0,
-  "mtdOrders": 219381,
+  "workDaysMonth": 22,
+  "daysIn": 5,
+  "pctMonth": 0.23,
+  "workDaysYear": 254,
+  "ytdDays": 111,
+  "pctYear": 0.44,
+  "mtdOrders": 250537,
   "mtdPY": 979932,
   "mtdQuota": 1479422,
-  "mtdPctQ": 0.15,
-  "mtdFore": 1206598,
-  "forePct": 0.82,
-  "ytdOrders": 5554247,
+  "mtdPctQ": 0.17,
+  "mtdFore": 1102362,
+  "forePct": 0.75,
+  "ytdOrders": 5585402,
   "ytdPY": 6234406,
   "annualQuota": 16019196,
-  "backlog": 0,
-  "revMTD": 0,
-  "revBgtMTD": 0,
-  "revPctMTD": 0,
-  "revYTD": 0,
-  "revBgtYTD": 0,
-  "revPctYTD": 0,
+  "backlog": 1386500,
+  "revMTD": 202784,
+  "revBgtMTD": 1617138,
+  "revPctMTD": 0.13,
+  "revYTD": 5100655,
+  "revBgtYTD": 6713948,
+  "revPctYTD": 0.76,
   "reps": [
     {
       "name": "ERIC BLASKOWSKI",
@@ -29,20 +29,20 @@
       "py": 239895,
       "quota": 352500,
       "pctQ": 0.2,
-      "fore": 380984,
-      "forePct": 1.08,
+      "fore": 304788,
+      "forePct": 0.86,
       "ytd": 1242197,
       "annQ": 3500000
     },
     {
       "name": "KEVIN KEITH",
-      "mtd": 46863,
+      "mtd": 59879,
       "py": 187602,
       "quota": 253000,
-      "pctQ": 0.19,
-      "fore": 257749,
-      "forePct": 1.02,
-      "ytd": 1179691,
+      "pctQ": 0.24,
+      "fore": 263467,
+      "forePct": 1.04,
+      "ytd": 1192706,
       "annQ": 2566000
     },
     {
@@ -51,8 +51,8 @@
       "py": 321418,
       "quota": 406000,
       "pctQ": 0.12,
-      "fore": 257096,
-      "forePct": 0.63,
+      "fore": 205677,
+      "forePct": 0.51,
       "ytd": 1678814,
       "annQ": 4522000
     },
@@ -69,13 +69,13 @@
     },
     {
       "name": "HAMP BRILEY",
-      "mtd": 5455,
+      "mtd": 11364,
       "py": 16997,
       "quota": 65000,
-      "pctQ": 0.08,
-      "fore": 30000,
-      "forePct": 0.46,
-      "ytd": 160167,
+      "pctQ": 0.17,
+      "fore": 50002,
+      "forePct": 0.77,
+      "ytd": 166077,
       "annQ": 600000
     },
     {
@@ -84,8 +84,8 @@
       "py": 27403,
       "quota": 113835,
       "pctQ": 0.2,
-      "fore": 127283,
-      "forePct": 1.12,
+      "fore": 101826,
+      "forePct": 0.89,
       "ytd": 410960,
       "annQ": 874656
     },
@@ -95,100 +95,100 @@
       "py": 58240,
       "quota": 35000,
       "pctQ": 0.08,
-      "fore": 15147,
-      "forePct": 0.43,
+      "fore": 12118,
+      "forePct": 0.35,
       "ytd": 57099,
       "annQ": 600000
     },
     {
       "name": "SUZANNE HORST",
-      "mtd": 3981,
+      "mtd": 10135,
       "py": 32855,
       "quota": 110000,
-      "pctQ": 0.04,
-      "fore": 21896,
-      "forePct": 0.2,
-      "ytd": 226574,
+      "pctQ": 0.09,
+      "fore": 44594,
+      "forePct": 0.41,
+      "ytd": 232728,
       "annQ": 946000
     },
     {
       "name": "TIFFANY HASKEKER",
-      "mtd": 13054,
+      "mtd": 18957,
       "py": 42171,
       "quota": 79087,
-      "pctQ": 0.17,
-      "fore": 71800,
-      "forePct": 0.91,
-      "ytd": 324524,
+      "pctQ": 0.24,
+      "fore": 83409,
+      "forePct": 1.05,
+      "ytd": 330426,
       "annQ": 965540
     },
     {
       "name": "TOTAL FIREROCK SALES TEAM",
-      "mtd": 211264,
+      "mtd": 242245,
       "py": 930430,
       "quota": 1449422,
-      "pctQ": 0.15,
-      "fore": 1161954,
+      "pctQ": 0.17,
+      "fore": 1065880,
       "forePct": 0,
-      "ytd": 5331319,
+      "ytd": 5362300,
       "annQ": 15694196
     }
   ],
   "prods": [
     {
       "name": "FIREPLACE/PP",
-      "mtd": 0,
-      "quota": 0,
-      "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
-      "backlog": 0,
-      "revYTD": 0
+      "mtd": 209794,
+      "quota": 922307,
+      "pctQ": 0.23,
+      "revMTD": 127909,
+      "revBgt": 1034926,
+      "revPct": 0.12,
+      "backlog": 627197,
+      "revYTD": 3600433
     },
     {
       "name": "PAVER/PP",
-      "mtd": 0,
-      "quota": 0,
-      "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
-      "backlog": 0,
-      "revYTD": 0
+      "mtd": 28248,
+      "quota": 345615,
+      "pctQ": 0.08,
+      "revMTD": 40332,
+      "revBgt": 346129,
+      "revPct": 0.12,
+      "backlog": 565659,
+      "revYTD": 767359
     },
     {
       "name": "ROOFING",
       "mtd": 0,
-      "quota": 0,
+      "quota": 54500,
       "pctQ": 0,
       "revMTD": 0,
-      "revBgt": 0,
+      "revBgt": 24961,
       "revPct": 0,
       "backlog": 0,
-      "revYTD": 0
+      "revYTD": 32032
     },
     {
       "name": "FLOORING",
       "mtd": 0,
-      "quota": 0,
+      "quota": 57000,
       "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
+      "revMTD": 2475,
+      "revBgt": 27961,
+      "revPct": 0.09,
       "backlog": 0,
-      "revYTD": 0
+      "revYTD": 133112
     },
     {
       "name": "INSTALLATION",
-      "mtd": 0,
-      "quota": 0,
-      "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
-      "backlog": 0,
-      "revYTD": 0
+      "mtd": 12495,
+      "quota": 100000,
+      "pctQ": 0.12,
+      "revMTD": 21656,
+      "revBgt": 99999,
+      "revPct": 0.22,
+      "backlog": 177100,
+      "revYTD": 265034
     },
     {
       "name": "SWD",
@@ -198,7 +198,7 @@
       "revMTD": 0,
       "revBgt": 0,
       "revPct": 0,
-      "backlog": 0,
+      "backlog": 16544,
       "revYTD": 0
     },
     {
@@ -214,40 +214,223 @@
     },
     {
       "name": "TOTAL",
-      "mtd": 0,
-      "quota": 0,
-      "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
-      "backlog": 0,
-      "revYTD": 0
+      "mtd": 250537,
+      "quota": 1479422,
+      "pctQ": 0.17,
+      "revMTD": 192373,
+      "revBgt": 1533976,
+      "revPct": 0.13,
+      "backlog": 1386500,
+      "revYTD": 4797971
     },
     {
       "name": "FREIGHT",
       "mtd": 0,
       "quota": 0,
       "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
+      "revMTD": 10411,
+      "revBgt": 83162,
+      "revPct": 0.13,
       "backlog": 0,
-      "revYTD": 0
+      "revYTD": 302684
     },
     {
       "name": "TOTAL W/ FREIGHT",
-      "mtd": 0,
+      "mtd": 250537,
       "quota": 0,
       "pctQ": 0,
-      "revMTD": 0,
-      "revBgt": 0,
-      "revPct": 0,
-      "backlog": 0,
-      "revYTD": 0
+      "revMTD": 202784,
+      "revBgt": 1617138,
+      "revPct": 0.13,
+      "backlog": 1386500,
+      "revYTD": 5100655
     }
   ],
-  "revMonthly": [],
-  "monthTotals": [],
-  "orders": [],
-  "lastUpdated": "2026-06-05 14:29 UTC"
+  "revMonthly": [
+    {
+      "name": "ERIC BLASKOWSKI",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "KEVIN KEITH",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "THORNTON COLE",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "MICHAEL KUHLMAN",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "HAMP BRILEY",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "GRAYSON MOOREHEAD",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "BEAU BOUTHILLIER",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "SUZANNE HORST",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "TIFFANY HASKEKER",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    },
+    {
+      "name": "Grand Total",
+      "jan": 0,
+      "feb": 0,
+      "mar": 0,
+      "apr": 0,
+      "may": 0,
+      "total": 0
+    }
+  ],
+  "monthTotals": [
+    {
+      "mo": "Jan",
+      "v": 0
+    },
+    {
+      "mo": "Feb",
+      "v": 0
+    },
+    {
+      "mo": "Mar",
+      "v": 0
+    },
+    {
+      "mo": "Apr",
+      "v": 0
+    },
+    {
+      "mo": "May",
+      "v": 0
+    }
+  ],
+  "orders": [
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150475",
+      "customer": "COX POOLS - BIRMINGHAM",
+      "amount": 848,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150478",
+      "customer": "FRANCIS BRYANT CONSTRUCTION",
+      "amount": 108,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150480",
+      "customer": "RUSSELL DO IT CENTER - ALEX CITY",
+      "amount": 9420,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150484",
+      "customer": "SOUTHERN CLAY BRICK",
+      "amount": 912,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150485",
+      "customer": "ALABAMA BRICK",
+      "amount": 1728,
+      "note": ""
+    },
+    {
+      "rep": "SUZANNE HORST",
+      "so": "FRKO150486",
+      "customer": "DANE CONSTRUCTION SERVICES",
+      "amount": 6154,
+      "note": ""
+    },
+    {
+      "rep": "HAMP BRILEY",
+      "so": "FRKO150087",
+      "customer": "CLAY INGELS COMPANY",
+      "amount": 5910,
+      "note": ""
+    },
+    {
+      "rep": "TIFFANY HASKEKER",
+      "so": "FRKO150481",
+      "customer": "NORTH BAY BRICK",
+      "amount": 5902,
+      "note": ""
+    },
+    {
+      "rep": "ELITE DEALS",
+      "so": "FRKO150437-01",
+      "customer": "ELITE DEALS LLC",
+      "amount": 174,
+      "note": ""
+    },
+    {
+      "rep": "HOUSE",
+      "so": "FRKO150479",
+      "customer": "WARRANTY REPAIR",
+      "amount": 0,
+      "note": ""
+    }
+  ],
+  "lastUpdated": "2026-06-08 13:42 UTC"
 }
