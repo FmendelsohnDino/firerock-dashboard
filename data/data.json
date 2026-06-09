@@ -2,409 +2,414 @@
   "reportDate": "Jun 08, 2026",
   "workDaysMonth": 22,
   "daysIn": 6,
-  "pctMonth": 0.2727272727272727,
+  "pctMonth": 0.27,
   "workDaysYear": 254,
   "ytdDays": 112,
-  "pctYear": 0.4409448818897638,
-  "mtdOrders": 311388.99999999994,
-  "mtdPY": 979932.1399999998,
-  "mtdQuota": 1479422,
-  "mtdPctQ": 0.2104801740139054,
-  "mtdFore": 1141759.6666666667,
-  "forePct": 0.7717606380509866,
-  "ytdOrders": 5646254.650000001,
-  "ytdPY": 6234406.02,
-  "annualQuota": 16019196,
-  "backlog": 1376434.4699999995,
-  "revMTD": 271151.12,
-  "revBgtMTD": 1617137.745595997,
-  "revPctMTD": 0.1676734840544255,
-  "revYTD": 5169022.48,
-  "revBgtYTD": 6713947.885004888,
-  "revPctYTD": 0.7698931490881296,
+  "pctYear": 0.44,
+  "mtdOrders": 301720,
+  "mtdPY": 930430,
+  "mtdQuota": 1449422,
+  "mtdPctQ": 0.21,
+  "mtdFore": 1106307,
+  "forePct": 0.76,
+  "ytdOrders": 5421774,
+  "ytdPY": 6025101,
+  "annualQuota": 15694196,
+  "backlog": 247107,
+  "revMTD": 0,
+  "revBgtMTD": 0,
+  "revPctMTD": 0,
+  "revYTD": 0,
+  "revBgtYTD": 0,
+  "revPctYTD": 0,
   "reps": [
     {
       "name": "ERIC BLASKOWSKI",
-      "mtd": 69269.89000000001,
-      "py": 239895.12,
+      "mtd": 69270,
+      "py": 239895,
       "quota": 352500,
-      "pctQ": 0.1965103262411348,
-      "fore": 253989.5966666667,
-      "forePct": 0.7205378628841609,
-      "ytd": 1242197.3900000001,
+      "pctQ": 0.2,
+      "fore": 353990,
+      "forePct": 0.72,
+      "ytd": 1242197,
       "annQ": 3500000
     },
     {
       "name": "KEVIN KEITH",
-      "mtd": 63200.72000000001,
-      "py": 187602.03,
+      "mtd": 63201,
+      "py": 187602,
       "quota": 253000,
-      "pctQ": 0.24980521739130437,
-      "fore": 231735.97333333336,
-      "forePct": 0.915952463768116,
-      "ytd": 1196028.05,
+      "pctQ": 0.25,
+      "fore": 231736,
+      "forePct": 0.92,
+      "ytd": 1196028,
       "annQ": 2566000
     },
     {
       "name": "THORNTON COLE",
-      "mtd": 92999.52,
-      "py": 321418.3999999998,
+      "mtd": 93000,
+      "py": 321418,
       "quota": 406000,
-      "pctQ": 0.22906285714285715,
-      "fore": 340998.24,
-      "forePct": 0.8398971428571428,
-      "ytd": 1725069.0700000003,
+      "pctQ": 0.23,
+      "fore": 340998,
+      "forePct": 0.84,
+      "ytd": 1725069,
       "annQ": 4522000
     },
     {
       "name": "MICHAEL KUHLMAN",
       "mtd": 0,
-      "py": 3848.36,
+      "py": 3848,
       "quota": 35000,
       "pctQ": 0,
       "fore": 0,
       "forePct": 0,
-      "ytd": 51293.38,
+      "ytd": 51293,
       "annQ": 1120000
     },
     {
       "name": "HAMP BRILEY",
-      "mtd": 11364.1,
-      "py": 16997.01,
+      "mtd": 11364,
+      "py": 16997,
       "quota": 65000,
-      "pctQ": 0.1748323076923077,
-      "fore": 41668.36666666667,
-      "forePct": 0.6410517948717949,
-      "ytd": 166076.61000000002,
+      "pctQ": 0.17,
+      "fore": 41668,
+      "forePct": 0.64,
+      "ytd": 166077,
       "annQ": 600000
     },
     {
       "name": "GRAYSON MOOREHEAD",
-      "mtd": 25462.579999999998,
-      "py": 27402.55,
+      "mtd": 25463,
+      "py": 27403,
       "quota": 113835,
-      "pctQ": 0.2236797118636623,
-      "fore": 93362.79333333333,
-      "forePct": 0.8201589435000952,
-      "ytd": 413280.16,
+      "pctQ": 0.22,
+      "fore": 93363,
+      "forePct": 0.82,
+      "ytd": 413280,
       "annQ": 874656
     },
     {
       "name": "BEAU BOUTHILLIER",
       "mtd": 2754,
-      "py": 58240.2,
+      "py": 58240,
       "quota": 35000,
-      "pctQ": 0.07868571428571429,
+      "pctQ": 0.08,
       "fore": 10098,
-      "forePct": 0.2885142857142857,
-      "ytd": 57098.67999999999,
+      "forePct": 0.29,
+      "ytd": 57099,
       "annQ": 600000
     },
     {
       "name": "SUZANNE HORST",
-      "mtd": 15280.060000000001,
-      "py": 32855.33,
+      "mtd": 15280,
+      "py": 32855,
       "quota": 110000,
-      "pctQ": 0.13890963636363637,
-      "fore": 56026.886666666665,
-      "forePct": 0.5093353333333334,
-      "ytd": 237872.65999999997,
+      "pctQ": 0.14,
+      "fore": 56027,
+      "forePct": 0.51,
+      "ytd": 237873,
       "annQ": 946000
     },
     {
       "name": "TIFFANY HASKEKER",
-      "mtd": 21389.35,
-      "py": 42171.33,
+      "mtd": 21389,
+      "py": 42171,
       "quota": 79087,
-      "pctQ": 0.2704534247094971,
-      "fore": 78427.61666666667,
-      "forePct": 0.9916625572681562,
-      "ytd": 332858.39999999997,
+      "pctQ": 0.27,
+      "fore": 78428,
+      "forePct": 0.99,
+      "ytd": 332858,
       "annQ": 965540
     },
     {
       "name": "TOTAL FIREROCK SALES TEAM",
-      "mtd": 301720.22,
-      "py": 930430.3299999997,
+      "mtd": 301720,
+      "py": 930430,
       "quota": 1449422,
-      "pctQ": 0.20816588957529275,
-      "fore": 1106307.4733333334,
-      "forePct": 0,
-      "ytd": 5421774.400000001,
+      "pctQ": 0.21,
+      "fore": 1106307,
+      "forePct": 0.76,
+      "ytd": 5421774,
       "annQ": 15694196
     }
   ],
   "prods": [
     {
       "name": "FIREPLACE/PP",
-      "mtd": 266556.72,
-      "quota": 922307,
-      "pctQ": 0.28901083912406605,
-      "revMTD": 180319.52000000002,
-      "revBgt": 1034925.6096210103,
-      "revPct": 0.1742342815016753,
-      "backlog": 624233.2,
-      "revYTD": 3652843.540000001
+      "mtd": 0,
+      "quota": 0,
+      "pctQ": 0,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
+      "backlog": 0,
+      "revYTD": 0
     },
     {
       "name": "PAVER/PP",
-      "mtd": 32337.779999999995,
-      "quota": 345615,
-      "pctQ": 0.09356590425762769,
-      "revMTD": 52672.24,
-      "revBgt": 346129.0353576827,
-      "revPct": 0.15217515613958701,
-      "backlog": 558557.56,
-      "revYTD": 779699.2899999999
+      "mtd": 0,
+      "quota": 0,
+      "pctQ": 0,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
+      "backlog": 0,
+      "revYTD": 0
     },
     {
       "name": "ROOFING",
       "mtd": 0,
-      "quota": 54500,
+      "quota": 0,
       "pctQ": 0,
       "revMTD": 0,
-      "revBgt": 24960.78912,
+      "revBgt": 0,
       "revPct": 0,
       "backlog": 0,
-      "revYTD": 32032.379999999997
+      "revYTD": 0
     },
     {
       "name": "FLOORING",
       "mtd": 0,
-      "quota": 57000,
+      "quota": 0,
       "pctQ": 0,
-      "revMTD": 2475,
-      "revBgt": 27961.427443199995,
-      "revPct": 0.08851479435474605,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
       "backlog": 0,
-      "revYTD": 133111.84999999998
+      "revYTD": 0
     },
     {
       "name": "INSTALLATION",
-      "mtd": 12494.5,
-      "quota": 100000,
-      "pctQ": 0.124945,
-      "revMTD": 21656,
-      "revBgt": 99999.12329999999,
-      "revPct": 0.21656189859816502,
-      "backlog": 177099.59,
-      "revYTD": 265034
+      "mtd": 0,
+      "quota": 0,
+      "pctQ": 0,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
+      "backlog": 0,
+      "revYTD": 0
     },
     {
       "name": "SWD",
       "mtd": 0,
       "quota": 0,
-      "pctQ": "-",
+      "pctQ": 0,
       "revMTD": 0,
       "revBgt": 0,
-      "revPct": "-",
-      "backlog": 16544.12,
+      "revPct": 0,
+      "backlog": 0,
       "revYTD": 0
     },
     {
       "name": "OTHER",
       "mtd": 0,
       "quota": 0,
-      "pctQ": "-",
+      "pctQ": 0,
       "revMTD": 0,
       "revBgt": 0,
-      "revPct": "-",
+      "revPct": 0,
       "backlog": 0,
       "revYTD": 0
     },
     {
       "name": "TOTAL",
-      "mtd": 311388.99999999994,
-      "quota": 1479422,
-      "pctQ": 0.2104801740139054,
-      "revMTD": 257122.76,
-      "revBgt": 1533975.9848418932,
-      "revPct": 0.16761850416224192,
-      "backlog": 1376434.4700000002,
-      "revYTD": 4862721.0600000005
+      "mtd": 0,
+      "quota": 0,
+      "pctQ": 0,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
+      "backlog": 0,
+      "revYTD": 0
     },
     {
       "name": "FREIGHT",
       "mtd": 0,
       "quota": 0,
       "pctQ": 0,
-      "revMTD": 14028.36,
-      "revBgt": 83161.76075410369,
-      "revPct": 0.16868762605303256,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
       "backlog": 0,
-      "revYTD": 306301.42000000004
+      "revYTD": 0
     },
     {
       "name": "TOTAL W/ FREIGHT",
-      "mtd": 311388.99999999994,
+      "mtd": 0,
       "quota": 0,
-      "pctQ": "-",
-      "revMTD": 271151.12,
-      "revBgt": 1617137.745595997,
-      "revPct": 0.1676734840544255,
-      "backlog": 1376434.4700000002,
-      "revYTD": 5169022.48
+      "pctQ": 0,
+      "revMTD": 0,
+      "revBgt": 0,
+      "revPct": 0,
+      "backlog": 0,
+      "revYTD": 0
     }
   ],
-  "revMonthly": [
-    {
-      "name": "ELITE DEALS",
-      "jan": 20883.4,
-      "feb": 8092.18,
-      "mar": 4557.53,
-      "apr": 11196.480000000001,
-      "may": 10871.619999999999,
-      "total": 1984.4
-    },
-    {
-      "name": "ERIC BLASKOWSKI",
-      "jan": 172905.2999999999,
-      "feb": 137414.86000000002,
-      "mar": 165774.44000000003,
-      "apr": 273320.11,
-      "may": 151554.5599999999,
-      "total": 58263.62000000001
-    },
-    {
-      "name": "KCB",
-      "jan": 0,
-      "feb": 2084,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
-    },
-    {
-      "name": "KEVIN KEITH",
-      "jan": 184892.87000000002,
-      "feb": 151654.08999999997,
-      "mar": 192332.91000000003,
-      "apr": 311281.82,
-      "may": 193436.5299999999,
-      "total": 89584.58
-    },
-    {
-      "name": "NET DIRECT",
-      "jan": 0,
-      "feb": 0,
-      "mar": 18017.339999999997,
-      "apr": 0,
-      "may": 2860.95,
-      "total": 191.52
-    },
-    {
-      "name": "THORNTON COLE",
-      "jan": 291224.36999999994,
-      "feb": 177306.69000000003,
-      "mar": 342650.01,
-      "apr": 321143.3900000001,
-      "may": 349388.45000000007,
-      "total": 61247.350000000006
-    },
-    {
-      "name": "WOODLAND DIRECT",
-      "jan": 25027.94,
-      "feb": 7557.5199999999995,
-      "mar": 18627.350000000002,
-      "apr": 13076,
-      "may": 18749.47,
-      "total": 7839.64
-    },
-    {
-      "name": "HOUSE",
-      "jan": 0,
-      "feb": 0,
-      "mar": 0,
-      "apr": 0,
-      "may": 0,
-      "total": 0
-    },
-    {
-      "name": "TIFFANY HASEKER",
-      "jan": 44660.090000000004,
-      "feb": 5262.04,
-      "mar": 88811.11,
-      "apr": 89737.33,
-      "may": 9467.82,
-      "total": 0
-    },
-    {
-      "name": "SUZANNE HORST",
-      "jan": 66794.44,
-      "feb": 30664.01,
-      "mar": 69322.32999999999,
-      "apr": 32238.09,
-      "may": 47536.85,
-      "total": 19246.52
-    },
-    {
-      "name": "MICHAEL KUHLMAN",
-      "jan": 15212.41,
-      "feb": 23667.300000000003,
-      "mar": 7292.070000000001,
-      "apr": 0,
-      "may": 11430.600000000002,
-      "total": 0
-    },
-    {
-      "name": "GRAY MOOREHEAD",
-      "jan": 30605.949999999997,
-      "feb": 37989.4,
-      "mar": 46745.63000000001,
-      "apr": 125489.72999999995,
-      "may": 67609.85999999999,
-      "total": 6129.88
-    },
-    {
-      "name": "HAMP BRILEY",
-      "jan": 1081,
-      "feb": 17671.98,
-      "mar": 28605.25999999999,
-      "apr": 57049.81999999999,
-      "may": 13471.85,
-      "total": 9881.25
-    },
-    {
-      "name": "BEAU BOUTHILLIER",
-      "jan": 8403.85,
-      "feb": 2311.2,
-      "mar": 5087.52,
-      "apr": 30087.2,
-      "may": 13409.38,
-      "total": 2754
-    },
-    {
-      "name": "Grand Total",
-      "jan": 861691.6199999999,
-      "feb": 601675.27,
-      "mar": 987823.5,
-      "apr": 1264619.97,
-      "may": 889787.9399999997,
-      "total": 257122.76
-    }
-  ],
+  "revMonthly": [],
   "monthTotals": [
     {
       "mo": "Jan",
-      "v": 861691.6199999999
+      "v": 0
     },
     {
       "mo": "Feb",
-      "v": 601675.27
+      "v": 0
     },
     {
       "mo": "Mar",
-      "v": 987823.5
+      "v": 0
     },
     {
       "mo": "Apr",
-      "v": 1264619.97
+      "v": 0
     },
     {
       "mo": "May",
-      "v": 889787.9399999997
+      "v": 0
     }
   ],
-  "orders": [],
-  "lastUpdated": "2026-06-08 21:57 UTC"
+  "orders": [
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150376",
+      "customer": "MAGNOLIA CLAY PRODUCTS",
+      "amount": 4195,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150470",
+      "customer": "JENNINGS BUILDERS SUPPLY - CASHIERS",
+      "amount": 16084,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150489",
+      "customer": "OLD SOUTH BRICK & SUPPLY",
+      "amount": 4161,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150494",
+      "customer": "CHRISTIE CUT - MEMPHIS",
+      "amount": 1775,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150496",
+      "customer": "METRO BRICK & STONE",
+      "amount": 13434,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150503",
+      "customer": "CHRISTIE CUT - MEMPHIS",
+      "amount": 4666,
+      "note": ""
+    },
+    {
+      "rep": "THORNTON COLE",
+      "so": "FRKO150505",
+      "customer": "COCREHAM BRICK & STONE",
+      "amount": 1940,
+      "note": ""
+    },
+    {
+      "rep": "SUZANNE HORST",
+      "so": "FRKO150501",
+      "customer": "B&L DISTRIBUTING CO",
+      "amount": 357,
+      "note": ""
+    },
+    {
+      "rep": "SUZANNE HORST",
+      "so": "FRKO150504",
+      "customer": "DANE CONSTRUCTION SERVICES",
+      "amount": 4788,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150407-P",
+      "customer": "WHATLEY SUPPLY COMPANY",
+      "amount": 522,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150492",
+      "customer": "Creative Habitats",
+      "amount": 2800,
+      "note": ""
+    },
+    {
+      "rep": "KEVIN KEITH",
+      "so": "FRKO150493-P",
+      "customer": "PLATINUM OUTDOOR CONSTRUCTION",
+      "amount": 0,
+      "note": ""
+    },
+    {
+      "rep": "TIFFANY HASEKER",
+      "so": "FRKO150182-P",
+      "customer": "NORTH BAY BRICK",
+      "amount": 2189,
+      "note": ""
+    },
+    {
+      "rep": "TIFFANY HASEKER",
+      "so": "FRKO150502",
+      "customer": "WR TAYLOR & COMPANY",
+      "amount": 244,
+      "note": ""
+    },
+    {
+      "rep": "GRAY MOOREHEAD",
+      "so": "FRKO150497-P",
+      "customer": "SCP - NASHVILLE",
+      "amount": 1860,
+      "note": ""
+    },
+    {
+      "rep": "GRAY MOOREHEAD",
+      "so": "FRKO150499",
+      "customer": "WILLOW WINDOW",
+      "amount": 460,
+      "note": ""
+    },
+    {
+      "rep": "ELITE DEALS",
+      "so": "FRKO150509",
+      "customer": "ELITE DEALS LLC",
+      "amount": 1584,
+      "note": ""
+    },
+    {
+      "rep": "BEAU BOUTHILLIER",
+      "so": "FRKO150490",
+      "customer": "POSITIVE CHIMNEY & FIRE PLACE",
+      "amount": 0,
+      "note": ""
+    },
+    {
+      "rep": "HOUSE",
+      "so": "FRKO150491-P",
+      "customer": "PAVER SAMPLES",
+      "amount": 0,
+      "note": ""
+    },
+    {
+      "rep": "HOUSE",
+      "so": "FRKO150506-P",
+      "customer": "PAVER DISPLAYS",
+      "amount": 0,
+      "note": ""
+    }
+  ],
+  "lastUpdated": "2026-06-09 13:43 UTC"
 }
