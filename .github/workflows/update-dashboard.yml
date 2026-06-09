@@ -1,19 +1,22 @@
 name: Update Dashboard Data
 
-# Only run when the spreadsheet or the extractor actually change.
-# (The bot's own data/data.json commits won't retrigger this, so no loops.)
+# Fires when a new daily report ZIP is uploaded, or when the converter / extractor
+# / trend base change. The bot's own data.json + sales_report.xlsx commits are NOT
+# in this list, so they can't retrigger the workflow (no loops).
 on:
   push:
     paths:
-      - 'sales_report.xlsx'
-      - 'extract_data.py'
-  workflow_dispatch:        # lets you run it manually from the Actions tab
+      - 'daily_report.zip'      # the two daily PDFs, zipped, from the uploader
+      - 'pdf_to_report.py'      # the PDF -> xlsx converter
+      - 'extract_data.py'       # the xlsx -> data.json extractor
+      - 'trend_base.xlsx'       # master export used only for the Jan-May trend
+  workflow_dispatch:            # lets you run it manually from the Actions tab
 
 permissions:
-  contents: write           # needed so the job can commit data/data.json
+  contents: write               # needed so the job can commit data/data.json
 
 jobs:
-  extract:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repo
@@ -24,21 +27,31 @@ jobs:
         with:
           python-version: '3.12'
 
+      # openpyxl reads/writes the Excel; pdfplumber reads the PDFs.
       - name: Install dependencies
-        run: pip install openpyxl
+        run: pip install openpyxl pdfplumber
 
-      # If sales_report.xlsx isn't present (e.g. you just deleted it),
-      # skip the rest cleanly instead of failing the run.
-      - name: Check for spreadsheet
+      # If the ZIP isn't present (e.g. a code-only push), skip cleanly.
+      - name: Check for daily report
         id: check
         run: |
-          if [ -f sales_report.xlsx ]; then
+          if [ -f daily_report.zip ]; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
-            echo "No sales_report.xlsx present — nothing to extract. Skipping."
+            echo "No daily_report.zip present — nothing to convert. Skipping."
           fi
 
+      # Step 1: turn the two daily PDFs into a schema-correct sales_report.xlsx.
+      # --zip auto-detects which PDF is the dashboard and which is the order summary,
+      # so the filenames inside the ZIP don't matter. The converter exits non-zero
+      # if any total fails to cross-foot, which fails the run instead of shipping
+      # bad numbers.
+      - name: Convert PDFs -> sales_report.xlsx
+        if: steps.check.outputs.exists == 'true'
+        run: python pdf_to_report.py --zip daily_report.zip --base trend_base.xlsx --out sales_report.xlsx
+
+      # Step 2: unchanged — read the xlsx into data/data.json.
       - name: Extract data
         if: steps.check.outputs.exists == 'true'
         run: python extract_data.py sales_report.xlsx
@@ -48,10 +61,10 @@ jobs:
         run: |
           git config user.name  "FireRock Dashboard Bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/data.json
+          git add data/data.json sales_report.xlsx
           if git diff --staged --quiet; then
-            echo "No data changes to commit."
+            echo "No changes to commit."
           else
-            git commit -m "Auto-update dashboard data $(date -u '+%Y-%m-%d %H:%M') UTC"
+            git commit -m "Auto-update dashboard $(date -u '+%Y-%m-%d %H:%M') UTC"
             git push
           fi
